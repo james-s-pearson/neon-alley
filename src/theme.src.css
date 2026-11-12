@@ -1,0 +1,1327 @@
+/* @settings
+name: Neon Alley
+id: neon-alley
+settings:
+    -
+        id: na-h-look
+        title: Look
+        type: heading
+        level: 2
+        collapsed: false
+    -
+        id: na-palette
+        title: Palette
+        description: "Neon Alley and Sodium Rain: asphalt and neon signs. Cold Forge and Polar Ember: slate with aqua or ice blue and forge orange."
+        type: class-select
+        allowEmpty: false
+        default: na-neon-alley
+        options:
+            -
+                label: Neon Alley
+                value: na-neon-alley
+            -
+                label: Sodium Rain
+                value: na-sodium-rain
+            -
+                label: Cold Forge
+                value: na-cold-forge
+            -
+                label: Polar Ember
+                value: na-polar-ember
+    -
+        id: na-structure
+        title: Structure
+        description: "Glass: rounded glass panes with a faint sheen. Retro: neon-framed pane headers and content, with 3D buttons that press in."
+        type: class-select
+        allowEmpty: false
+        default: na-glass
+        options:
+            -
+                label: Glass
+                value: na-glass
+            -
+                label: Retro
+                value: na-retro
+    -
+        id: na-callout-style
+        title: Callouts
+        description: "HUD: corner brackets and spaced capitals. Glass: soft glow with a coloured left edge."
+        type: class-select
+        allowEmpty: false
+        default: na-callout-hud
+        options:
+            -
+                label: HUD
+                value: na-callout-hud
+            -
+                label: Glass
+                value: na-callout-glass
+    -
+        id: na-retro-sheen
+        title: "Retro: glass sheen"
+        description: "Adds the Glass structure's faint sheen to Retro's framed panes."
+        type: class-toggle
+        default: false
+    -
+        id: na-h-backdrop
+        title: Backdrop and wallpaper
+        type: heading
+        level: 2
+        collapsed: true
+    -
+        id: na-wallpaper-choice
+        title: Wallpaper
+        description: "The image behind the panes. Three are built in. Choose Custom to use your own image (below)."
+        type: class-select
+        allowEmpty: false
+        default: na-wall-skyline
+        options:
+            -
+                label: Neon skyline
+                value: na-wall-skyline
+            -
+                label: Rain alley
+                value: na-wall-alley
+            -
+                label: Sodium street
+                value: na-wall-sodium
+            -
+                label: Custom
+                value: na-wall-custom
+            -
+                label: None
+                value: na-wall-none
+    -
+        id: na-wallpaper-custom
+        title: Custom wallpaper
+        description: 'With Wallpaper set to Custom. Paste an image in CSS form, for example url("data:image/png;base64,...") for an embedded image. If you paste a web link instead, Obsidian loads it when you choose it; the theme itself loads nothing from the internet.'
+        type: variable-text
+        default: none
+    -
+        id: na-wallpaper-dim
+        title: Wallpaper dimming
+        description: "How much of the palette's frame colour covers the wallpaper. Higher is darker and calmer."
+        type: variable-number-slider
+        min: 0
+        max: 1
+        step: 0.05
+        default: 0.35
+    -
+        id: na-h-see-through
+        title: "See-through panes follow Obsidian's Translucent window setting (Settings → Appearance)."
+        type: heading
+        level: 3
+        collapsed: false
+    -
+        id: na-pane-opacity
+        title: Pane opacity
+        description: "With Translucent window on: lower shows more of the wallpaper."
+        type: variable-number-slider
+        min: 0.4
+        max: 1
+        step: 0.05
+        default: 0.75
+    -
+        id: na-pane-blur
+        title: Pane blur
+        description: "With Translucent window on: how much the wallpaper is blurred behind the panes."
+        type: variable-number-slider
+        min: 0
+        max: 30
+        step: 1
+        default: 12
+        format: px
+    -
+        id: na-h-fine
+        title: Fine-tuning
+        type: heading
+        level: 2
+        collapsed: true
+    -
+        id: na-no-glow
+        title: Turn off heading glow
+        type: class-toggle
+        default: false
+    -
+        id: na-prompt-headings
+        title: Prompt-style headings
+        description: "Adds a ❯ before each heading, like a shell prompt."
+        type: class-toggle
+        default: false
+    -
+        id: na-flat-panes
+        title: "Glass: flat panes"
+        description: "Turns off the rounded glass panes and the gaps between them."
+        type: class-toggle
+        default: false
+    -
+        id: na-plain-frames
+        title: "Retro: plain frames"
+        description: "Turns the neon frames into plain grey lines without glow."
+        type: class-toggle
+        default: false
+    -
+        id: na-no-markers
+        title: Turn off severity markers
+        description: "Removes the shapes before #critical, #high, #medium, #low and #info."
+        type: class-toggle
+        default: false
+    -
+        id: na-scanlines
+        title: CRT scanlines
+        description: "A faint scanline overlay across the whole window."
+        type: class-toggle
+        default: false
+    -
+        id: na-no-3d
+        title: "Retro: flat buttons"
+        description: "Turns off the 3D buttons."
+        type: class-toggle
+        default: false
+*/
+
+/* ============================================================
+   Neon Alley 0.3.0
+   A city street at night. One theme with four palettes, two
+   structures (Glass, Retro) and two callout styles, in dark
+   and light mode.
+
+   Designed and directed by James Pearson; CSS generated with
+   Claude (AI). The Retro structure is inspired by the Retroma
+   theme by emarpiee but shares no code with it. Chakra Petch is
+   embedded at the end under the SIL Open Font License 1.1
+   (OFL.txt in this folder).
+
+   Contents
+     1. Palettes          (edit colours here)
+     2. Core mapping      (which colour does which job)
+     3. Headings
+     4. Note details
+     5. Structure: Glass
+     6. Structure: Retro
+     7. Callouts
+     8. Tags
+     9. Graph view
+    10. Mission-status tasks
+    11. Severity markers
+    12. HUD status bar, link glow, scanlines
+    13. Plugins (Calendar, Kanban)
+    14. Embedded font
+   ============================================================ */
+
+/* ---------- 1. Palettes ----------
+   Every palette fills the same named roles, so the rest of the
+   file never needs to know which palette is active. */
+
+/* Neon Alley: the default */
+.theme-dark {
+  --na-frame: #0c0d10;    /* window frame, title bar, status bar */
+  --na-side: #121419;     /* sidebars */
+  --na-page: #171a20;     /* notes */
+  --na-raise: #20242c;    /* hover, table headers, inline code */
+  --na-line: #30353f;     /* borders */
+  --na-text: #eceef2;
+  --na-muted: #a0a6b2;
+  --na-faint: #646b78;
+
+  --na-red: #ff3b30;
+  --na-orange: #ff6b1a;   /* traffic cone */
+  --na-gold: #ffc83d;     /* amber */
+  --na-green: #b6ff3b;    /* acid lime */
+  --na-blue: #4da3ff;     /* signage blue */
+  --na-cyan: #3de0ff;
+
+  --na-accent: var(--na-orange);
+  --na-link: var(--na-gold);
+  --na-bold: #ff4545;     /* neon red */
+  --na-italic: #2fd6c3;   /* wet teal, as in Sodium Rain */
+  --na-bold-italic: #ff3fd2; /* neon fuchsia */
+  --na-h1: var(--na-orange);
+  --na-h2: var(--na-blue);
+  --na-h3: var(--na-green);
+  --na-h4: var(--na-gold);
+  --na-h5: var(--na-cyan);
+  --na-h6: var(--na-muted);
+  --na-frame-head: var(--na-orange);  /* Retro: header frames */
+  --na-frame-body: var(--na-cyan);    /* Retro: content frames */
+
+  --na-on-accent: var(--na-frame);
+
+  --accent-h: 21;
+  --accent-s: 100%;
+  --accent-l: 55%;
+
+  /* Canvas card colours (r, g, b) */
+  --canvas-color-1: 255, 59, 48;
+  --canvas-color-2: 255, 107, 26;
+  --canvas-color-3: 255, 200, 61;
+  --canvas-color-4: 182, 255, 59;
+  --canvas-color-5: 61, 224, 255;
+  --canvas-color-6: 77, 163, 255;
+}
+
+/* Sodium Rain */
+.theme-dark.na-sodium-rain {
+  --na-frame: #0b0d10;
+  --na-side: #11141a;
+  --na-page: #161a21;
+  --na-raise: #1f242d;
+  --na-line: #2f3540;
+  --na-text: #edf0f4;
+  --na-muted: #a1a8b4;
+  --na-faint: #636b79;
+
+  --na-red: #ff3344;      /* brake light */
+  --na-gold: #ffd23f;
+  --na-green: #2fd6c3;    /* wet teal */
+  --na-cyan: #4da3ff;
+
+  --na-bold: var(--na-gold);
+  --na-italic: var(--na-green);
+  --na-bold-italic: var(--na-italic);
+  --na-link: var(--na-cyan);
+  --na-frame-body: var(--na-green);
+
+  /* Canvas card colours (r, g, b) */
+  --canvas-color-1: 255, 51, 68;
+  --canvas-color-2: 255, 107, 26;
+  --canvas-color-3: 255, 210, 63;
+  --canvas-color-4: 47, 214, 195;
+  --canvas-color-5: 77, 163, 255;
+  --canvas-color-6: 77, 163, 255;
+}
+
+/* Cold Forge */
+.theme-dark.na-cold-forge {
+  --na-frame: #12161b;
+  --na-side: #171c22;
+  --na-page: #1d232a;
+  --na-raise: #262e37;
+  --na-line: #34404c;
+  --na-text: #e2eaf1;
+  --na-muted: #98a6b4;
+  --na-faint: #64707c;
+
+  --na-red: #ff5c6c;
+  --na-orange: #ff7a3d;   /* forge orange */
+  --na-gold: #ffc857;
+  --na-green: #7fdc9a;
+  --na-blue: #8cc8ff;
+  --na-cyan: #4fe3d0;     /* aqua */
+
+  --na-accent: var(--na-cyan);
+  --na-link: var(--na-cyan);
+  --na-bold: #ff9a5c;
+  --na-italic: var(--na-text);
+  --na-bold-italic: var(--na-italic);
+  --na-h1: var(--na-orange);
+  --na-h2: var(--na-cyan);
+  --na-h3: var(--na-text);
+  --na-h4: var(--na-cyan);
+  --na-h5: var(--na-muted);
+  --na-h6: var(--na-muted);
+
+  --accent-h: 172;
+  --accent-s: 73%;
+  --accent-l: 60%;
+
+  /* Canvas card colours (r, g, b) */
+  --canvas-color-1: 255, 92, 108;
+  --canvas-color-2: 255, 122, 61;
+  --canvas-color-3: 255, 200, 87;
+  --canvas-color-4: 127, 220, 154;
+  --canvas-color-5: 79, 227, 208;
+  --canvas-color-6: 140, 200, 255;
+}
+
+/* Polar Ember: Cold Forge with ice blue in place of aqua */
+.theme-dark.na-polar-ember {
+  --na-frame: #13171d;
+  --na-side: #191e25;
+  --na-page: #1f252d;
+  --na-raise: #28313b;
+  --na-line: #37424f;
+  --na-text: #e3ebf3;
+  --na-muted: #9aa8b7;
+  --na-faint: #66727f;
+
+  --na-red: #ff5c6c;
+  --na-orange: #ff7a3d;
+  --na-gold: #ffc857;
+  --na-green: #7fdc9a;
+  --na-blue: #8cc8ff;
+  --na-cyan: #8cc8ff;     /* ice blue */
+
+  --na-accent: var(--na-cyan);
+  --na-link: var(--na-cyan);
+  --na-bold: #ff9a5c;
+  --na-italic: var(--na-text);
+  --na-bold-italic: var(--na-italic);
+  --na-h1: var(--na-orange);
+  --na-h2: var(--na-cyan);
+  --na-h3: var(--na-text);
+  --na-h4: var(--na-cyan);
+  --na-h5: var(--na-muted);
+  --na-h6: var(--na-muted);
+
+  --accent-h: 209;
+  --accent-s: 100%;
+  --accent-l: 77%;
+
+  /* Canvas card colours (r, g, b) */
+  --canvas-color-1: 255, 92, 108;
+  --canvas-color-2: 255, 122, 61;
+  --canvas-color-3: 255, 200, 87;
+  --canvas-color-4: 127, 220, 154;
+  --canvas-color-5: 140, 200, 255;
+  --canvas-color-6: 140, 200, 255;
+}
+
+
+/* ---------- Light palettes ----------
+   Daylight versions: the same hues, darkened until they read
+   clearly on a pale background. */
+
+/* Neon Alley (light) */
+.theme-light {
+  --na-frame: #dde1e7;
+  --na-side: #e8ebf0;
+  --na-page: #f7f8fa;
+  --na-raise: #e9ecf1;
+  --na-line: #c3c9d3;
+  --na-text: #15181d;
+  --na-muted: #4b5260;
+  --na-faint: #7a8291;
+
+  --na-red: #cb1f19;
+  --na-orange: #b54200;
+  --na-gold: #915c00;
+  --na-green: #427300;
+  --na-blue: #1d67c1;
+  --na-cyan: #00728b;
+
+  --na-accent: var(--na-orange);
+  --na-link: var(--na-gold);
+  --na-bold: #c81e1e;
+  --na-italic: #00756a;
+  --na-bold-italic: #b0129a;
+  --na-h1: var(--na-orange);
+  --na-h2: var(--na-blue);
+  --na-h3: var(--na-green);
+  --na-h4: var(--na-gold);
+  --na-h5: var(--na-cyan);
+  --na-h6: var(--na-muted);
+  --na-frame-head: var(--na-orange);
+  --na-frame-body: var(--na-cyan);
+  --na-on-accent: #ffffff;
+
+  --accent-h: 22;
+  --accent-s: 100%;
+  --accent-l: 35%;
+
+  /* Canvas card colours (r, g, b) */
+  --canvas-color-1: 208, 32, 26;
+  --canvas-color-2: 217, 79, 0;
+  --canvas-color-3: 168, 107, 0;
+  --canvas-color-4: 79, 138, 0;
+  --canvas-color-5: 0, 131, 159;
+  --canvas-color-6: 31, 111, 209;
+}
+
+/* Sodium Rain (light) */
+.theme-light.na-sodium-rain {
+  --na-red: #c8102e;
+  --na-gold: #856300;
+  --na-green: #00756a;
+  --na-cyan: #1d67c1;
+  --na-bold: var(--na-gold);
+  --na-italic: var(--na-green);
+  --na-bold-italic: var(--na-italic);
+  --na-link: var(--na-cyan);
+  --na-frame-body: var(--na-green);
+
+  /* Canvas card colours (r, g, b) */
+  --canvas-color-1: 200, 16, 46;
+  --canvas-color-2: 217, 79, 0;
+  --canvas-color-3: 156, 116, 0;
+  --canvas-color-4: 0, 135, 122;
+  --canvas-color-5: 31, 111, 209;
+  --canvas-color-6: 31, 111, 209;
+}
+
+/* Cold Forge (light) */
+.theme-light.na-cold-forge {
+  --na-frame: #dce2e8;
+  --na-side: #e7ecf1;
+  --na-page: #f6f8fa;
+  --na-raise: #e8edf2;
+  --na-line: #c2cbd5;
+  --na-text: #16202a;
+  --na-muted: #4a5868;
+  --na-faint: #788594;
+
+  --na-red: #c42f3e;
+  --na-orange: #af4b0d;
+  --na-gold: #915e00;
+  --na-green: #297744;
+  --na-blue: #2969b2;
+  --na-cyan: #007569;
+
+  --na-accent: var(--na-cyan);
+  --na-link: var(--na-cyan);
+  --na-bold: #ab4e18;
+  --na-italic: var(--na-text);
+  --na-bold-italic: var(--na-italic);
+  --na-h1: var(--na-orange);
+  --na-h2: var(--na-cyan);
+  --na-h3: var(--na-text);
+  --na-h4: var(--na-cyan);
+  --na-h5: var(--na-muted);
+  --na-h6: var(--na-muted);
+
+  --accent-h: 174;
+  --accent-s: 100%;
+  --accent-l: 23%;
+
+  /* Canvas card colours (r, g, b) */
+  --canvas-color-1: 198, 47, 63;
+  --canvas-color-2: 196, 84, 15;
+  --canvas-color-3: 163, 106, 0;
+  --canvas-color-4: 47, 138, 79;
+  --canvas-color-5: 0, 143, 128;
+  --canvas-color-6: 42, 109, 184;
+}
+
+/* Polar Ember (light) */
+.theme-light.na-polar-ember {
+  --na-frame: #dce2e9;
+  --na-side: #e7ecf2;
+  --na-page: #f6f8fb;
+  --na-raise: #e8edf3;
+  --na-line: #c2cbd6;
+  --na-text: #16202b;
+  --na-muted: #4a5869;
+  --na-faint: #788595;
+
+  --na-red: #c42f3e;
+  --na-orange: #af4b0d;
+  --na-gold: #915e00;
+  --na-green: #297744;
+  --na-blue: #2969b2;
+  --na-cyan: #2969b2;
+
+  --na-accent: var(--na-cyan);
+  --na-link: var(--na-cyan);
+  --na-bold: #ab4e18;
+  --na-italic: var(--na-text);
+  --na-bold-italic: var(--na-italic);
+  --na-h1: var(--na-orange);
+  --na-h2: var(--na-cyan);
+  --na-h3: var(--na-text);
+  --na-h4: var(--na-cyan);
+  --na-h5: var(--na-muted);
+  --na-h6: var(--na-muted);
+
+  --accent-h: 212;
+  --accent-s: 62%;
+  --accent-l: 43%;
+
+  /* Canvas card colours (r, g, b) */
+  --canvas-color-1: 198, 47, 63;
+  --canvas-color-2: 196, 84, 15;
+  --canvas-color-3: 163, 106, 0;
+  --canvas-color-4: 47, 138, 79;
+  --canvas-color-5: 42, 109, 184;
+  --canvas-color-6: 42, 109, 184;
+}
+
+/* ---------- 2. Core mapping ---------- */
+
+:is(.theme-dark, .theme-light) {
+  /* Backgrounds */
+  --background-primary: var(--na-page);
+  --background-primary-alt: var(--na-raise);
+  --background-secondary: var(--na-side);
+  --background-secondary-alt: var(--na-frame);
+  --background-modifier-border: var(--na-line);
+  --background-modifier-border-hover: var(--na-faint);
+  --background-modifier-border-focus: var(--na-accent);
+  --background-modifier-hover: color-mix(in srgb, var(--na-accent) 8%, transparent);
+  --background-modifier-active-hover: color-mix(in srgb, var(--na-accent) 15%, transparent);
+  --background-modifier-form-field: var(--na-frame);
+  --background-modifier-error: var(--na-red);
+  --background-modifier-success: var(--na-green);
+  --titlebar-background: transparent;
+  --titlebar-background-focused: transparent;
+  --ribbon-background: transparent;
+  --ribbon-background-collapsed: transparent;
+  --tab-container-background: transparent;
+  --status-bar-background: color-mix(in srgb, var(--na-frame) 85%, transparent);
+  --status-bar-border-color: transparent;
+  --status-bar-text-color: var(--na-faint);
+  --divider-color: var(--na-line);
+
+  /* Text */
+  --text-normal: var(--na-text);
+  --text-muted: var(--na-muted);
+  --text-faint: var(--na-faint);
+  --text-accent: var(--na-accent);
+  --text-accent-hover: var(--na-accent);
+  --text-on-accent: var(--na-on-accent);
+  --text-selection: color-mix(in srgb, var(--na-link) 22%, transparent);
+  --text-highlight-bg: color-mix(in srgb, var(--na-gold) 28%, transparent);
+  --text-error: var(--na-red);
+  --text-warning: var(--na-gold);
+  --text-success: var(--na-green);
+
+  /* Interactive */
+  --interactive-normal: var(--na-raise);
+  --interactive-hover: var(--na-line);
+  --interactive-accent: var(--na-accent);
+  --interactive-accent-hover: color-mix(in srgb, var(--na-accent) 85%, white);
+
+  /* Markdown */
+  --h1-color: var(--na-h1);
+  --h2-color: var(--na-h2);
+  --h3-color: var(--na-h3);
+  --h4-color: var(--na-h4);
+  --h5-color: var(--na-h5);
+  --h6-color: var(--na-h6);
+  --bold-color: var(--na-bold);
+  --italic-color: var(--na-italic);
+  --link-color: var(--na-link);
+  --link-color-hover: var(--na-link);
+  --link-external-color: var(--na-link);
+  --link-external-color-hover: var(--na-link);
+  --link-decoration-color: color-mix(in srgb, var(--na-link) 40%, transparent);
+  --link-unresolved-color: var(--na-muted);
+  --link-unresolved-decoration-color: var(--na-faint);
+  --blockquote-border-color: var(--na-blue);
+  --hr-color: var(--na-line);
+  --list-marker-color: var(--na-faint);
+  --list-marker-color-hover: var(--na-accent);
+  --checkbox-color: var(--na-accent);
+  --checkbox-color-hover: var(--na-accent);
+  --checkbox-border-color: var(--na-muted);
+  --checkbox-marker-color: var(--na-frame);
+  --checklist-done-color: var(--na-faint);
+  --table-header-background: var(--na-raise);
+  --table-border-color: var(--na-line);
+
+  /* Navigation */
+  --nav-item-background-active: color-mix(in srgb, var(--na-accent) 18%, transparent);
+  --nav-item-color-active: var(--na-accent);
+  --nav-item-background-hover: color-mix(in srgb, var(--na-accent) 8%, transparent);
+
+  /* Code: Tokyo Night colours (see section 4b) */
+  --code-background: var(--na-code-bg);
+  --code-normal: var(--na-code-fg);
+  --code-comment: var(--na-code-comment);
+  --code-keyword: var(--na-code-keyword);
+  --code-function: var(--na-code-function);
+  --code-string: var(--na-code-string);
+  --code-value: var(--na-code-number);
+  --code-property: var(--na-code-property);
+  --code-operator: var(--na-code-operator);
+  --code-punctuation: var(--na-code-bracket);
+  --code-important: var(--na-code-self);
+  --code-tag: var(--na-code-function);
+
+  /* Tags: pills */
+  --tag-radius: 999px;
+  --tag-padding-x: 0.6em;
+
+  /* Headings */
+  --na-heading-font: "Chakra Petch", var(--font-interface);
+  --h1-font: var(--na-heading-font);
+  --h2-font: var(--na-heading-font);
+  --h3-font: var(--na-heading-font);
+  --h4-font: var(--na-heading-font);
+  --h5-font: var(--na-heading-font);
+  --h6-font: var(--na-heading-font);
+  --inline-title-font: var(--na-heading-font);
+  --inline-title-color: var(--na-h1);
+  --h1-weight: 700;
+  --h2-weight: 700;
+  --h3-weight: 600;
+  --h4-weight: 600;
+  --h5-weight: 600;
+  --h6-weight: 600;
+}
+
+/* Active tab: accent line along the top */
+:is(.theme-dark, .theme-light) .workspace-tab-header.is-active {
+  box-shadow: inset 0 2px 0 var(--na-accent);
+}
+
+/* ---------- 3. Headings ---------- */
+
+/* Small caps on H1, H2 and the note title */
+:is(.theme-dark, .theme-light) :is(
+  .markdown-rendered :is(h1, h2),
+  .cm-line:is(.HyperMD-header-1, .HyperMD-header-2),
+  .inline-title
+) {
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+
+/* Hairline under H1, H2 and the note title, in the heading's colour */
+:is(.theme-dark, .theme-light) :is(.markdown-rendered h1, .cm-line.HyperMD-header-1, .inline-title) {
+  border-bottom: 1px solid color-mix(in srgb, var(--na-h1) 55%, transparent);
+  padding-bottom: 0.2em;
+}
+:is(.theme-dark, .theme-light) :is(.markdown-rendered h2, .cm-line.HyperMD-header-2) {
+  border-bottom: 1px solid color-mix(in srgb, var(--na-h2) 55%, transparent);
+  padding-bottom: 0.2em;
+}
+
+/* Glow on H1, H2 and the note title */
+:is(.theme-dark, .theme-light):not(.na-no-glow) :is(
+  .markdown-rendered :is(h1, h2),
+  .cm-line:is(.HyperMD-header-1, .HyperMD-header-2),
+  .inline-title
+) {
+  text-shadow: 0 0 14px color-mix(in srgb, currentColor 50%, transparent);
+}
+
+/* Optional prompt-style prefix */
+:is(.theme-dark, .theme-light).na-prompt-headings :is(
+  .markdown-rendered :is(h1, h2, h3, h4, h5, h6),
+  .cm-line.HyperMD-header
+)::before {
+  content: "❯ ";
+  opacity: 0.5;
+  font-weight: normal;
+}
+
+/* ---------- 4. Note details ---------- */
+
+/* inline code only: code blocks (pre > code) keep the code theme's colours */
+:is(.theme-dark, .theme-light) :is(.markdown-rendered :not(pre) > code, .cm-s-obsidian span.cm-inline-code) {
+  color: var(--na-accent);
+  background-color: var(--na-raise);
+}
+
+:is(.theme-dark, .theme-light) :is(
+  .markdown-rendered :is(strong em, em strong, b i, i b),
+  .cm-s-obsidian span.cm-strong.cm-em
+) {
+  color: var(--na-bold-italic);
+}
+
+:is(.theme-dark, .theme-light) .markdown-rendered pre {
+  border: 1px solid var(--na-line);
+  border-radius: 8px;
+}
+
+/* ---------- 4a. Code: Tokyo Night ----------
+   Syntax colours match LazyVim's default colour scheme, Tokyo
+   Night (moon in dark mode, day in light mode), checked token by
+   token against Neovim's Tree-sitter highlights. Obsidian's two
+   highlighters (CodeMirror while editing, Prism in Reading view)
+   know fewer token kinds than Tree-sitter, so a few kinds share a
+   colour; see the README. */
+
+.theme-dark {
+  --na-code-bg: #222436;      /* Tokyo Night moon background */
+  --na-code-fg: #c8d3f5;
+  --na-code-comment: #636da6;
+  --na-code-keyword: #fca7ea;   /* const, class, return, await */
+  --na-code-control: #c099ff;   /* def, function, if, for */
+  --na-code-import: #86e1fc;    /* import, export, decorators */
+  --na-code-function: #82aaff;
+  --na-code-type: #65bcff;      /* class names, built-ins */
+  --na-code-string: #c3e88d;
+  --na-code-doc: #ffc777;       /* docstrings */
+  --na-code-number: #ff966c;    /* numbers, booleans, constants */
+  --na-code-property: #4fd6be;
+  --na-code-operator: #89ddff;
+  --na-code-bracket: #828bb8;
+  --na-code-param: #ffc777;
+  --na-code-self: #ff757f;
+  --na-code-regex: #b4f9f8;
+}
+.theme-light {
+  --na-code-bg: #e1e2e7;      /* Tokyo Night day background */
+  --na-code-fg: #3760bf;
+  --na-code-comment: #848cb5;
+  --na-code-keyword: #7847bd;
+  --na-code-control: #9854f1;
+  --na-code-import: #007197;
+  --na-code-function: #2e7de9;
+  --na-code-type: #188092;
+  --na-code-string: #587539;
+  --na-code-doc: #8c6c3e;
+  --na-code-number: #b15c00;
+  --na-code-property: #387068;
+  --na-code-operator: #006a83;
+  --na-code-bracket: #6172b0;
+  --na-code-param: #8c6c3e;
+  --na-code-self: #f52a65;
+  --na-code-regex: #2e5857;
+}
+
+/* Editing view (CodeMirror) */
+:is(.theme-dark, .theme-light) .cm-s-obsidian :is(.HyperMD-codeblock, .cm-line) {
+  & span.cm-keyword { color: var(--na-code-keyword); }
+  /* Italic only when no highlighter plugin (such as Shiki) has
+     styled the token inside; it sets its own italics */
+  & span.cm-keyword:not(:has(span)) { font-style: italic; }
+  & span.cm-def { color: var(--na-code-function); }
+  & span:is(.cm-builtin, .cm-type, .cm-variable-3) { color: var(--na-code-type); }
+  & span:is(.cm-number, .cm-atom) { color: var(--na-code-number); }
+  & span:is(.cm-string, .cm-string-2) { color: var(--na-code-string); }
+  & span.cm-comment { color: var(--na-code-comment); font-style: italic; }
+  & span.cm-operator { color: var(--na-code-operator); }
+  & span:is(.cm-punctuation, .cm-bracket) { color: var(--na-code-bracket); }
+  & span.cm-property { color: var(--na-code-property); }
+  & span:is(.cm-variable, .cm-variable-2) { color: var(--na-code-fg); }
+  & span.cm-meta { color: var(--na-code-import); }
+  & span.cm-tag { color: var(--na-code-function); }
+  & span.cm-attribute { color: var(--na-code-property); }
+}
+
+/* Reading view (Prism) */
+:is(.theme-dark, .theme-light) .markdown-rendered pre code {
+  & .token.keyword { color: var(--na-code-keyword); font-style: italic; }
+  & .token.keyword.module { color: var(--na-code-import); font-style: normal; }
+  & .token:is(.function, .function-variable) { color: var(--na-code-function); }
+  & .token:is(.class-name, .builtin) { color: var(--na-code-type); }
+  & .token:is(.number, .boolean, .constant) { color: var(--na-code-number); }
+  & .token:is(.string, .char, .template-string, .attr-value) { color: var(--na-code-string); }
+  & .token.triple-quoted-string { color: var(--na-code-doc); }
+  & .token:is(.interpolation-punctuation, .operator) { color: var(--na-code-operator); }
+  & .token.punctuation { color: var(--na-code-bracket); }
+  & .token.comment { color: var(--na-code-comment); font-style: italic; }
+  & .token:is(.property, .attr-name) { color: var(--na-code-property); }
+  & .token.parameter { color: var(--na-code-param); }
+  & .token:is(.decorator, .annotation) { color: var(--na-code-import); }
+  & .token.regex { color: var(--na-code-regex); }
+  & .token.tag { color: var(--na-code-function); }
+}
+
+/* ---------- 4b. Backdrop and wallpaper ----------
+   The theme paints the space behind the panes itself, so it does
+   not depend on the macOS window material (which turns light grey
+   when macOS is in light mode). A wallpaper sits under a layer of
+   the frame colour. When Obsidian's "Translucent window" setting
+   is on, the panes turn see-through and blur the wallpaper; when
+   it is off, they are solid. --na-skyline is added by build.sh. */
+
+:is(.theme-dark, .theme-light) {
+  --na-wallpaper: var(--na-skyline, none);
+  --na-wallpaper-custom: none;
+  --na-wallpaper-dim: 0.35;
+  --na-pane-opacity: 0.75;
+  --na-pane-blur: 12px;
+  --na-pane-side: var(--na-side);
+  --na-pane-page: var(--na-page);
+  --na-sheen: linear-gradient(
+    160deg,
+    color-mix(in srgb, var(--na-accent) 6%, transparent),
+    transparent 45%
+  );
+  --workspace-background-translucent: transparent;
+}
+.theme-light {
+  --na-wallpaper-dim: 0.7;
+}
+:is(.theme-dark, .theme-light).na-wall-alley {
+  --na-wallpaper: var(--na-alley, none);
+}
+:is(.theme-dark, .theme-light).na-wall-sodium {
+  --na-wallpaper: var(--na-sodium, none);
+}
+:is(.theme-dark, .theme-light).na-wall-custom {
+  --na-wallpaper: var(--na-wallpaper-custom);
+}
+:is(.theme-dark, .theme-light).na-wall-none {
+  --na-wallpaper: none;
+}
+
+body:is(.theme-dark, .theme-light) {
+  background-color: var(--na-frame);
+  background-image:
+    linear-gradient(
+      color-mix(in srgb, var(--na-frame) calc(var(--na-wallpaper-dim) * 100%), transparent),
+      color-mix(in srgb, var(--na-frame) calc(var(--na-wallpaper-dim) * 100%), transparent)
+    ),
+    var(--na-wallpaper);
+  background-size: cover;
+  background-position: center bottom;
+  background-repeat: no-repeat;
+}
+
+body:is(.theme-dark, .theme-light) :is(.app-container, .workspace, .horizontal-main-container) {
+  background-color: transparent;
+}
+
+/* The vault name strip under the left sidebar */
+body:not(.is-mobile):is(.theme-dark, .theme-light) .workspace-split.mod-primary-split .workspace-sidedock-vault-profile {
+  background-color: transparent;
+}
+
+/* See-through panes, Glass and Retro alike */
+body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light) {
+  --na-pane-side: color-mix(in srgb, var(--na-side) calc(var(--na-pane-opacity) * 100%), transparent);
+  --na-pane-page: color-mix(in srgb, var(--na-page) calc(var(--na-pane-opacity) * 100%), transparent);
+}
+
+body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light):not(.na-retro) .workspace-leaf-content,
+body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :is(
+  .workspace-leaf-content > .view-header,
+  .workspace-split.mod-root .workspace-leaf-content > .view-content,
+  .workspace-split.mod-sidedock .workspace-leaf-content
+) {
+  backdrop-filter: blur(var(--na-pane-blur));
+}
+
+/* ---------- 5. Structure: Glass ---------- */
+
+:is(.theme-dark, .theme-light):not(.na-retro):not(.na-flat-panes) {
+  --divider-color: transparent;
+  --tab-outline-color: transparent;
+}
+
+:is(.theme-dark, .theme-light):not(.na-retro):not(.na-flat-panes) :is(.workspace-split.mod-root, .workspace-split.mod-sidedock) {
+  background-color: transparent;
+}
+
+:is(.theme-dark, .theme-light):not(.na-retro):not(.na-flat-panes) .workspace-tabs .workspace-leaf {
+  background-color: transparent;
+  padding: 0 4px 6px;
+}
+
+:is(.theme-dark, .theme-light):not(.na-retro):not(.na-flat-panes) .workspace-leaf-content {
+  border-radius: 14px;
+  border: 1px solid color-mix(in srgb, var(--na-accent) 14%, transparent);
+  overflow: hidden;
+  background-image: var(--na-sheen);
+}
+
+:is(.theme-dark, .theme-light):not(.na-retro):not(.na-flat-panes) .workspace-split.mod-sidedock .workspace-leaf-content {
+  background-color: var(--na-pane-side);
+}
+
+:is(.theme-dark, .theme-light):not(.na-retro):not(.na-flat-panes) .workspace-split.mod-root .workspace-leaf-content {
+  background-color: var(--na-pane-page);
+}
+
+:is(.theme-dark, .theme-light):not(.na-retro):not(.na-flat-panes) .workspace-leaf-content :is(.view-header, .view-content) {
+  background-color: transparent;
+}
+
+/* ---------- 6. Structure: Retro ----------
+   Each pane is split into two framed blocks on the dark frame:
+   a header block (cyan frame) and a content block (orange frame,
+   faint glow). Buttons are 3D and press in when clicked. */
+
+:is(.theme-dark, .theme-light).na-retro {
+  --divider-color: transparent;
+  --tab-outline-color: transparent;
+  --na-retro-radius: 10px;
+  --na-retro-border: 2px;
+  --na-retro-head: color-mix(in srgb, var(--na-frame-head) 75%, transparent);
+  --na-retro-body: var(--na-frame-body);
+  --na-retro-glow:
+    0 0 8px color-mix(in srgb, var(--na-frame-body) 15%, transparent),
+    inset 0 0 4px color-mix(in srgb, var(--na-frame-body) 7%, transparent);
+}
+
+:is(.theme-dark, .theme-light).na-retro.na-plain-frames {
+  --na-retro-head: var(--na-line);
+  --na-retro-body: var(--na-line);
+  --na-retro-glow: none;
+}
+
+:is(.theme-dark, .theme-light).na-retro :is(.workspace-split.mod-root, .workspace-split.mod-sidedock),
+:is(.theme-dark, .theme-light).na-retro .workspace-tabs .workspace-leaf {
+  background-color: transparent;
+}
+
+:is(.theme-dark, .theme-light).na-retro .workspace-tabs .workspace-leaf {
+  padding: 0 6px 8px;
+}
+
+:is(.theme-dark, .theme-light).na-retro .workspace-leaf-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background-color: transparent;
+}
+
+:is(.theme-dark, .theme-light).na-retro .workspace-leaf-content > .view-header {
+  background-color: var(--na-pane-side);
+  border: var(--na-retro-border) solid var(--na-retro-head);
+  border-radius: var(--na-retro-radius);
+}
+
+:is(.theme-dark, .theme-light).na-retro .workspace-leaf-content > .view-content {
+  flex: 1 1 0;
+  min-height: 0;
+  height: auto;
+  border: var(--na-retro-border) solid var(--na-retro-body);
+  border-radius: var(--na-retro-radius);
+  box-shadow: var(--na-retro-glow);
+  overflow: auto;
+}
+
+:is(.theme-dark, .theme-light).na-retro .workspace-split.mod-root .workspace-leaf-content > .view-content {
+  background-color: var(--na-pane-page);
+}
+
+/* Optional: the Glass sheen on Retro's content blocks */
+:is(.theme-dark, .theme-light).na-retro.na-retro-sheen :is(
+  .workspace-split.mod-root .workspace-leaf-content > .view-content,
+  .workspace-split.mod-sidedock .workspace-leaf-content
+) {
+  background-image: var(--na-sheen);
+}
+
+/* Sidebars: the whole pane is one framed block, because some
+   sidebar views (search, tags) have no separate content block */
+:is(.theme-dark, .theme-light).na-retro .workspace-split.mod-sidedock .workspace-leaf-content {
+  background-color: var(--na-pane-side);
+  border: var(--na-retro-border) solid var(--na-retro-body);
+  border-radius: var(--na-retro-radius);
+  box-shadow: var(--na-retro-glow);
+  overflow: hidden;
+}
+:is(.theme-dark, .theme-light).na-retro .workspace-split.mod-sidedock .workspace-leaf-content > :is(.view-header, .view-content) {
+  border: none;
+  border-radius: 0;
+  box-shadow: none;
+  background-color: transparent;
+}
+
+/* Leave room under the main panes for the floating status bar */
+:is(.theme-dark, .theme-light).na-retro :is(.workspace-split.mod-root .workspace-tabs, .workspace-split.mod-right-split .workspace-tabs:last-of-type) .workspace-leaf {
+  padding-bottom: calc(var(--status-bar-font-size, 12px) + 18px);
+}
+
+/* Tabs in the main area: framed like the header blocks */
+:is(.theme-dark, .theme-light).na-retro .mod-root .workspace-tab-header.is-active {
+  box-shadow: none;
+  border: var(--na-retro-border) solid var(--na-retro-head);
+  border-bottom: none;
+  border-radius: var(--na-retro-radius) var(--na-retro-radius) 0 0;
+}
+
+/* 3D buttons that press in */
+:is(.theme-dark, .theme-light).na-retro:not(.na-no-3d) :is(
+  button:not(.mod-cta, .mod-warning),
+  .view-header .clickable-icon,
+  .nav-action-button,
+  .side-dock-ribbon-action
+) {
+  border: 1px solid var(--na-line);
+  border-radius: 6px;
+  background-color: var(--na-raise);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, white 10%, transparent),
+    inset 0 -2px 0 color-mix(in srgb, black 45%, transparent);
+  transition: transform 0.06s ease, box-shadow 0.06s ease;
+}
+
+:is(.theme-dark, .theme-light).na-retro:not(.na-no-3d) :is(
+  button:not(.mod-cta, .mod-warning),
+  .view-header .clickable-icon,
+  .nav-action-button,
+  .side-dock-ribbon-action
+):is(:active, .is-active) {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 2px 3px color-mix(in srgb, black 50%, transparent);
+  color: var(--na-accent);
+}
+
+:is(.theme-dark, .theme-light).na-retro:not(.na-no-3d) button.mod-cta {
+  box-shadow: inset 0 -2px 0 color-mix(in srgb, black 35%, transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.theme-dark, .theme-light).na-retro :is(button, .clickable-icon) {
+    transition: none;
+  }
+}
+
+/* ---------- 7. Callouts ----------
+   Each callout type sets --na-cc, a full colour. The look comes
+   from the style below (HUD or Glass). */
+
+:is(.theme-dark, .theme-light) .callout {
+  --na-cc: var(--na-blue);
+  color: var(--na-text);
+}
+:is(.theme-dark, .theme-light) .callout :is(.callout-title, .callout-icon, .callout-fold) {
+  color: var(--na-cc);
+}
+:is(.theme-dark, .theme-light) .callout :is(.callout-icon, .callout-fold) .svg-icon {
+  color: var(--na-cc);
+  stroke: var(--na-cc);
+}
+
+/* HUD: thin border, faint fill, corner brackets, spaced capitals */
+:is(.theme-dark, .theme-light):not(.na-callout-glass) .callout {
+  border-radius: 2px;
+  border: 1px solid color-mix(in srgb, var(--na-cc) 45%, transparent);
+  background:
+    linear-gradient(var(--na-cc), var(--na-cc)) top left / 12px 2px no-repeat,
+    linear-gradient(var(--na-cc), var(--na-cc)) top left / 2px 12px no-repeat,
+    linear-gradient(var(--na-cc), var(--na-cc)) bottom right / 12px 2px no-repeat,
+    linear-gradient(var(--na-cc), var(--na-cc)) bottom right / 2px 12px no-repeat,
+    color-mix(in srgb, var(--na-cc) 9%, transparent);
+}
+:is(.theme-dark, .theme-light):not(.na-callout-glass) .callout .callout-title-inner {
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  font-size: 0.85em;
+}
+
+/* Glass: soft glow with a coloured left edge */
+:is(.theme-dark, .theme-light).na-callout-glass .callout {
+  border-radius: 12px;
+  border: 1px solid color-mix(in srgb, var(--na-cc) 30%, transparent);
+  border-left: 3px solid var(--na-cc);
+  background: color-mix(in srgb, var(--na-cc) 8%, transparent);
+  box-shadow: 0 0 18px color-mix(in srgb, var(--na-cc) 12%, transparent);
+}
+
+/* Built-in types */
+:is(.theme-dark, .theme-light) .callout:is([data-callout="note"], [data-callout="default"], [data-callout="example"]) { --na-cc: var(--na-blue); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="info"], [data-callout="abstract"], [data-callout="summary"], [data-callout="tldr"]) { --na-cc: var(--na-cyan); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="todo"], [data-callout="important"]) { --na-cc: var(--na-orange); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="tip"], [data-callout="hint"], [data-callout="success"], [data-callout="check"], [data-callout="done"]) { --na-cc: var(--na-green); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="question"], [data-callout="help"], [data-callout="faq"], [data-callout="warning"], [data-callout="caution"], [data-callout="attention"]) { --na-cc: var(--na-gold); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="failure"], [data-callout="fail"], [data-callout="missing"], [data-callout="danger"], [data-callout="error"], [data-callout="bug"]) { --na-cc: var(--na-red); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="quote"], [data-callout="cite"]) { --na-cc: var(--na-faint); }
+
+/* Security: > [!finding], [!vuln], [!ioc], [!recon], [!cmd], [!flag] */
+:is(.theme-dark, .theme-light) .callout[data-callout="finding"] { --na-cc: var(--na-orange); --callout-icon: lucide-crosshair; }
+:is(.theme-dark, .theme-light) .callout[data-callout="vuln"] { --na-cc: var(--na-red); --callout-icon: lucide-shield-alert; }
+:is(.theme-dark, .theme-light) .callout[data-callout="ioc"] { --na-cc: var(--na-gold); --callout-icon: lucide-fingerprint; }
+:is(.theme-dark, .theme-light) .callout[data-callout="recon"] { --na-cc: var(--na-blue); --callout-icon: lucide-radar; }
+:is(.theme-dark, .theme-light) .callout[data-callout="cmd"] { --na-cc: var(--na-green); --callout-icon: lucide-terminal; }
+:is(.theme-dark, .theme-light) .callout[data-callout="cmd"] .callout-content { font-family: var(--font-monospace); }
+
+/* [!flag] stays blurred until you hover, so flags and secrets
+   stay hidden in screenshots */
+:is(.theme-dark, .theme-light) .callout[data-callout="flag"] { --na-cc: var(--na-green); --callout-icon: lucide-flag; }
+:is(.theme-dark, .theme-light) .callout[data-callout="flag"] .callout-content { filter: blur(6px); transition: filter 0.2s ease; }
+:is(.theme-dark, .theme-light) .callout[data-callout="flag"]:hover .callout-content { filter: none; }
+
+/* Project: > [!risk], [!decision], [!blocker], [!action], [!done] */
+:is(.theme-dark, .theme-light) .callout[data-callout="risk"] { --na-cc: var(--na-orange); --callout-icon: lucide-triangle-alert; }
+:is(.theme-dark, .theme-light) .callout[data-callout="decision"] { --na-cc: var(--na-blue); --callout-icon: lucide-git-branch; }
+:is(.theme-dark, .theme-light) .callout[data-callout="blocker"] { --na-cc: var(--na-red); --callout-icon: lucide-octagon-x; }
+:is(.theme-dark, .theme-light) .callout[data-callout="action"] { --na-cc: var(--na-cyan); --callout-icon: lucide-list-todo; }
+:is(.theme-dark, .theme-light) .callout[data-callout="done"] { --callout-icon: lucide-circle-check; }
+
+/* ---------- 8. Tags ---------- */
+
+:is(.theme-dark, .theme-light) :is(.tag, .cm-hashtag, .multi-select-pill) {
+  --na-tc: var(--na-cyan);
+  --tag-color: var(--na-tc);
+  --tag-color-hover: var(--na-tc);
+  --tag-background: color-mix(in srgb, var(--na-tc) 15%, transparent);
+  --tag-background-hover: color-mix(in srgb, var(--na-tc) 25%, transparent);
+}
+
+/* Severity */
+:is(.theme-dark, .theme-light) :is(.tag[href="#critical" i], .cm-hashtag.cm-tag-critical, .multi-select-pill.colored-tag-critical) { --na-tc: var(--na-red); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#high" i], .cm-hashtag.cm-tag-high, .multi-select-pill.colored-tag-high) { --na-tc: var(--na-orange); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#medium" i], .cm-hashtag.cm-tag-medium, .multi-select-pill.colored-tag-medium) { --na-tc: var(--na-gold); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#low" i], .cm-hashtag.cm-tag-low, .multi-select-pill.colored-tag-low) { --na-tc: var(--na-green); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#info" i], .cm-hashtag.cm-tag-info, .multi-select-pill.colored-tag-info) { --na-tc: var(--na-blue); }
+
+/* Project status */
+:is(.theme-dark, .theme-light) :is(.tag[href="#todo" i], .cm-hashtag.cm-tag-todo, .multi-select-pill.colored-tag-todo) { --na-tc: var(--na-cyan); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#in-progress" i], .cm-hashtag.cm-tag-in-progress, .multi-select-pill.colored-tag-in-progress) { --na-tc: var(--na-blue); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#blocked" i], .cm-hashtag.cm-tag-blocked, .multi-select-pill.colored-tag-blocked) { --na-tc: var(--na-red); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#risk" i], .cm-hashtag.cm-tag-risk, .multi-select-pill.colored-tag-risk) { --na-tc: var(--na-orange); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#decision" i], .cm-hashtag.cm-tag-decision, .multi-select-pill.colored-tag-decision) { --na-tc: var(--na-gold); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#done" i], .cm-hashtag.cm-tag-done, .multi-select-pill.colored-tag-done) { --na-tc: var(--na-green); }
+
+/* The Colored Tags plugin paints every tag with very specific
+   selectors. For the severity and status tags, the theme wins. */
+:is(.theme-dark, .theme-light) :is(
+  .tag:is([href="#critical" i], [href="#high" i], [href="#medium" i], [href="#low" i], [href="#info" i],
+          [href="#todo" i], [href="#in-progress" i], [href="#blocked" i], [href="#risk" i], [href="#decision" i], [href="#done" i]),
+  .cm-hashtag:is(.cm-tag-critical, .cm-tag-high, .cm-tag-medium, .cm-tag-low, .cm-tag-info,
+                 .cm-tag-todo, .cm-tag-in-progress, .cm-tag-blocked, .cm-tag-risk, .cm-tag-decision, .cm-tag-done),
+  .multi-select-pill:is(.colored-tag-critical, .colored-tag-high, .colored-tag-medium, .colored-tag-low, .colored-tag-info, .colored-tag-todo, .colored-tag-in-progress, .colored-tag-blocked, .colored-tag-risk, .colored-tag-decision, .colored-tag-done)
+) {
+  color: var(--tag-color) !important;
+  background-color: var(--tag-background) !important;
+  background-image: none !important;
+}
+
+
+/* ---------- 9. Graph view ---------- */
+
+:is(.theme-dark, .theme-light) {
+  --graph-line: color-mix(in srgb, var(--na-muted) 35%, transparent);
+  --graph-node: var(--na-muted);
+  --graph-node-focused: var(--na-accent);
+  --graph-node-tag: var(--na-green);
+  --graph-node-attachment: var(--na-blue);
+  --graph-node-unresolved: var(--na-faint);
+  --graph-text: var(--na-text);
+}
+
+/* ---------- 10. Mission-status tasks ----------
+   - [/] in progress   - [!] urgent     - [?] question
+   - [>] deferred      - [-] cancelled
+   Custom states keep their text readable (no strike-through),
+   except cancelled. */
+
+:is(.theme-dark, .theme-light) :is(li, .HyperMD-task-line):is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"]) {
+  --checklist-done-decoration: none;
+  --checklist-done-color: var(--na-text);
+}
+:is(.theme-dark, .theme-light) :is(li, .HyperMD-task-line)[data-task="-"] {
+  --checklist-done-color: var(--na-faint);
+}
+
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"]) {
+  --na-task: var(--na-blue);
+  background-color: color-mix(in srgb, var(--na-task) 20%, transparent);
+  border-color: var(--na-task);
+}
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"])::after {
+  -webkit-mask-image: none;
+  mask-image: none;
+  background: none;
+  color: var(--na-task);
+  font-family: var(--font-monospace);
+  font-weight: 700;
+  font-size: 0.8em;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  inset: 0;
+}
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="/"] { --na-task: var(--na-blue); }
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="/"]::after { content: "/"; }
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="!"] { --na-task: var(--na-red); }
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="!"]::after { content: "!"; }
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="?"] { --na-task: var(--na-gold); }
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="?"]::after { content: "?"; }
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task=">"] { --na-task: var(--na-cyan); }
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task=">"]::after { content: ">"; }
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="-"] { --na-task: var(--na-faint); }
+:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="-"]::after { content: "-"; }
+
+/* ---------- 11. Severity markers ----------
+   A small shape before each severity tag, so the level reads
+   without relying on colour alone. */
+
+:is(.theme-dark, .theme-light) :is(.tag[href="#critical" i], .cm-hashtag-begin.cm-tag-critical)::before { content: "◆ "; }
+:is(.theme-dark, .theme-light) :is(.tag[href="#high" i], .cm-hashtag-begin.cm-tag-high)::before { content: "▲ "; }
+:is(.theme-dark, .theme-light) :is(.tag[href="#medium" i], .cm-hashtag-begin.cm-tag-medium)::before { content: "■ "; }
+:is(.theme-dark, .theme-light) :is(.tag[href="#low" i], .cm-hashtag-begin.cm-tag-low)::before { content: "▼ "; }
+:is(.theme-dark, .theme-light) :is(.tag[href="#info" i], .cm-hashtag-begin.cm-tag-info)::before { content: "● "; }
+:is(.theme-dark, .theme-light) :is(.tag, .cm-hashtag-begin)::before {
+  font-size: 0.75em;
+  vertical-align: 0.1em;
+}
+:is(.theme-dark, .theme-light) .tag {
+  white-space: nowrap;
+}
+:is(.theme-dark, .theme-light).na-no-markers :is(.tag, .cm-hashtag-begin)::before { content: none; }
+
+/* ---------- 12. HUD status bar and link glow ---------- */
+
+:is(.theme-dark, .theme-light) .status-bar {
+  font-family: var(--font-monospace);
+  font-size: 0.75em;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+:is(.theme-dark, .theme-light) .status-bar-item + .status-bar-item {
+  border-left: 1px solid color-mix(in srgb, var(--na-accent) 35%, transparent);
+}
+
+:is(.theme-dark, .theme-light):not(.na-no-glow) :is(.markdown-rendered a, .cm-hmd-internal-link, .cm-link, .cm-url):hover {
+  text-shadow: 0 0 8px color-mix(in srgb, currentColor 60%, transparent);
+  transition: text-shadow 0.15s ease;
+}
+
+/* Optional CRT scanlines across the window */
+:is(.theme-dark, .theme-light).na-scanlines .app-container::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0 2px,
+    color-mix(in srgb, black 12%, transparent) 2px 3px
+  );
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :is(.theme-dark, .theme-light) :is(.markdown-rendered a, .cm-hmd-internal-link, .cm-link, .cm-url) { transition: none; }
+  :is(.theme-dark, .theme-light) .callout[data-callout="flag"] .callout-content { transition: none; }
+}
+
+/* ---------- 13. Plugins ---------- */
+
+/* Calendar */
+:is(.theme-dark, .theme-light) #calendar-container {
+  --color-background-heading: transparent;
+  --color-background-day: transparent;
+  --color-background-weeknum: transparent;
+  --color-background-weekend: color-mix(in srgb, var(--na-accent) 4%, transparent);
+  --color-dot: var(--na-accent);
+  --color-arrow: var(--na-muted);
+  --color-button: var(--na-muted);
+  --color-text-title: var(--na-text);
+  --color-text-heading: var(--na-muted);
+  --color-text-day: var(--na-text);
+  --color-text-today: var(--na-accent);
+  --color-text-weeknum: var(--na-faint);
+}
+:is(.theme-dark, .theme-light) #calendar-container .title {
+  font-family: var(--na-heading-font);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+
+/* Kanban: HUD lanes and cards */
+:is(.theme-dark, .theme-light) .kanban-plugin__lane {
+  background-color: var(--na-side);
+  border: 1px solid var(--na-line);
+  border-top: 2px solid var(--na-accent);
+  border-radius: 6px;
+}
+:is(.theme-dark, .theme-light) .kanban-plugin__lane-title {
+  font-family: var(--na-heading-font);
+  font-variant: small-caps;
+  letter-spacing: 0.05em;
+}
+:is(.theme-dark, .theme-light) .kanban-plugin__item {
+  background-color: var(--na-page);
+  border: 1px solid var(--na-line);
+  border-radius: 4px;
+}
+:is(.theme-dark, .theme-light) .kanban-plugin__item:hover {
+  border-color: color-mix(in srgb, var(--na-accent) 60%, transparent);
+}
+
+/* ---------- 14. Embedded font: Chakra Petch (SIL OFL 1.1) ---------- */
+
+
+
+
+
+
+
+
+
+
+
