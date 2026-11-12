@@ -1183,13 +1183,22 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 :is(.theme-dark, .theme-light) :is(li, .HyperMD-task-line)[data-task="-"] {
   --checklist-done-color: var(--na-faint);
 }
+/* cancelled tasks: faded and struck through (Obsidian 1.15 only styles
+   "x" as done by itself) */
+:is(.theme-dark, .theme-light) li[data-task="-"],
+:is(.theme-dark, .theme-light) .HyperMD-task-line[data-task="-"] {
+  color: var(--na-faint);
+  text-decoration: line-through;
+}
 
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"]) {
+/* The status sits on the checkbox in older Obsidian, and on the list item
+   or editor line in Obsidian 1.15 and later; both are matched. */
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"]), li:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"]) input.task-list-item-checkbox) {
   --na-task: var(--na-blue);
   background-color: color-mix(in srgb, var(--na-task) 20%, transparent);
   border-color: var(--na-task);
 }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"])::after {
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"]), li:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"], [data-task="-"]) input.task-list-item-checkbox)::after {
   -webkit-mask-image: none;
   mask-image: none;
   background: none;
@@ -1204,16 +1213,16 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
   position: absolute;
   inset: 0;
 }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="/"] { --na-task: var(--na-blue); }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="/"]::after { content: "/"; }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="!"] { --na-task: var(--na-red); }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="!"]::after { content: "!"; }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="?"] { --na-task: var(--na-gold); }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="?"]::after { content: "?"; }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task=">"] { --na-task: var(--na-cyan); }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task=">"]::after { content: ">"; }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="-"] { --na-task: var(--na-faint); }
-:is(.theme-dark, .theme-light) input.task-list-item-checkbox[data-task="-"]::after { content: "-"; }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="/"]), li:is([data-task="/"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="/"]) input.task-list-item-checkbox) { --na-task: var(--na-blue); }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="/"]), li:is([data-task="/"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="/"]) input.task-list-item-checkbox)::after { content: "/"; }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="!"]), li:is([data-task="!"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="!"]) input.task-list-item-checkbox) { --na-task: var(--na-red); }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="!"]), li:is([data-task="!"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="!"]) input.task-list-item-checkbox)::after { content: "!"; }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="?"]), li:is([data-task="?"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="?"]) input.task-list-item-checkbox) { --na-task: var(--na-gold); }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="?"]), li:is([data-task="?"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="?"]) input.task-list-item-checkbox)::after { content: "?"; }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task=">"]), li:is([data-task=">"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task=">"]) input.task-list-item-checkbox) { --na-task: var(--na-cyan); }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task=">"]), li:is([data-task=">"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task=">"]) input.task-list-item-checkbox)::after { content: ">"; }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="-"]), li:is([data-task="-"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="-"]) input.task-list-item-checkbox) { --na-task: var(--na-faint); }
+:is(.theme-dark, .theme-light) :is(input.task-list-item-checkbox:is([data-task="-"]), li:is([data-task="-"]) > input.task-list-item-checkbox, .HyperMD-task-line:is([data-task="-"]) input.task-list-item-checkbox)::after { content: "-"; }
 
 /* ---------- 11. Severity markers ----------
    A small shape before each severity tag, so the level reads

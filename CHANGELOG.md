@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.1 (12 November 2026)
+
+- Mission-status task markers (`[/]`, `[!]`, `[?]`, `[>]`, `[-]`) work
+  again in Obsidian 1.15, which moved the task status from the checkbox
+  to its line; both are now matched.
+- Cancelled tasks (`[-]`) are faded and struck through again.
+- New screenshots, taken in a demo vault: a full-window view with
+  wallpaper, and Retro, light and Cold Forge views.
+
 ## 1.0.0 (12 November 2026)
 
 First public release.

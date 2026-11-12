@@ -1,11 +1,11 @@
 # Neon Alley
 
+![Neon Alley, dark mode, Glass structure](images/01-dark-neon-alley-glass.png)
+
 An Obsidian theme that looks like a city street at night: dark asphalt,
 traffic-cone orange and a row of neon signs. It has HUD-style callouts
 for security work, colour-coded severity tags and a retro, framed
 layout with buttons that press in.
-
-![Neon Alley, dark mode, Glass structure](images/01-dark-neon-alley-glass.png)
 
 ## How this was made
 
