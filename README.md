@@ -59,6 +59,8 @@ notes; adjust the opacity and blur in the theme's options.
 
 ### Security callouts
 
+![Security callouts](images/04-security-callouts.png)
+
 Use these like any Obsidian callout, for example `> [!vuln]`:
 
 - `[!finding]`: a finding
@@ -75,6 +77,8 @@ Use these like any Obsidian callout, for example `> [!vuln]`:
 
 ### Severity and status tags
 
+![Severity and status tags](images/05-severity-and-status-tags.png)
+
 Severity tags get a colour and a shape, so the level reads without
 relying on colour alone:
 
@@ -89,7 +93,7 @@ Project status tags get their own colours: `#todo`, `#in-progress`,
 
 ### Mission-status tasks
 
-![Mission-status tasks in Cold Forge](images/04-dark-cold-forge-tasks.png)
+![Mission-status tasks in Cold Forge](images/06-dark-cold-forge-tasks.png)
 
 - `- [/]` in progress
 - `- [!]` urgent
