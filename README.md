@@ -14,6 +14,9 @@ were generated with Claude (Anthropic's AI) through many rounds of my
 feedback, and the theme was checked against screenshots of Obsidian at
 each step.
 
+Read how it was designed, tested and released in the
+[Neon Alley write-up](https://github.com/james-s-pearson/Cybersecurity-Portfolio/tree/main/released-software/neon-alley-theme).
+
 ## Looks
 
 Choose these in the Style Settings or Style Manager plugin.
@@ -40,10 +43,12 @@ Choose these in the Style Settings or Style Manager plugin.
 - **HUD**: corner brackets and spaced capitals.
 - **Glass**: a soft glow with a colored left edge.
 
-**Backdrop and wallpaper:** behind the panes sits one of three built-in
+**Backdrop and wallpaper:** behind the panes sits one of six built-in
 wallpapers drawn for this theme: Neon skyline (a rainy city at night),
-Rain alley (neon signs down a wet alley) or Sodium street (a road under
-orange street lamps). You can dim it, turn it off, or use your own image
+Rain alley (neon signs down a wet alley), Sodium street (a road under
+orange street lamps), Rail line (an elevated train in green neon),
+Harbor (cranes over ice-blue water) or Tunnel (a road tunnel of red
+brake lights). You can dim it, turn it off, or use your own image
 (paste `url("https://…")`). A web link is loaded by Obsidian when you
 choose it; the theme itself loads nothing from the internet.
 
@@ -54,6 +59,29 @@ notes; adjust the opacity and blur in the theme's options.
 ![Retro with HUD callouts](images/02-dark-neon-alley-retro-callouts.png)
 
 ![Light mode](images/03-light-neon-alley-retro.png)
+
+## Customize
+
+With Style Settings (or Style Manager), the **Colors** section lets you
+change any of these, with a separate value for dark and light mode:
+
+- the accent color, or Obsidian's own accent color
+- the six neon colors that most of the theme is built from
+- bold, italic and bold italic text
+- each heading level, links, the default tag color and the severity
+  tags
+- code colors (the Treelights plugin's "Follow Obsidian theme" option
+  uses them too)
+- each callout type and the Retro frames
+- text and background shades (advanced)
+
+Leave a color empty to keep the palette's own. The contrast check below
+covers the built-in palettes only, so check that your own colors stay
+readable.
+
+Other options: the body font for headings, normal-case headings instead
+of small capitals, glow strength (0 turns the glow off) and sharp or
+rounded corners.
 
 ## Features
 
@@ -112,7 +140,10 @@ Project status tags get their own colors: `#todo`, `#in-progress`,
   (for example, every keyword is pink)
 - A HUD-style status bar
 - Graph view and Canvas colors that follow the palette
-- Styling for the Calendar and Kanban plugins
+- Mermaid diagrams in the theme's colors, with neon outlines and a soft
+  glow
+- Styling for the Calendar, Kanban, Tasks (overdue dates in red, due
+  today in amber) and File Explorer Note Count plugins
 - Optional prompt-style headings (`❯`), CRT scanlines, flat panes,
   plain frames, flat buttons and a glass sheen for Retro
 
@@ -130,22 +161,25 @@ Hover effects are turned off when your system asks for reduced motion.
 
 ## Install
 
-Neon Alley is not in Obsidian's community theme list yet. To install it
-by hand:
-
-1. In your vault, open the `.obsidian/themes` folder and create a folder
-   called `Neon Alley`.
-2. Copy `manifest.json` and `theme.css` into it.
-3. In Obsidian, open **Settings → Appearance → Themes** and choose
-   **Neon Alley**. Restart Obsidian if it is not listed.
-4. For the options, install the **Style Settings** plugin (or Style
+1. In Obsidian, open **Settings → Appearance → Themes → Manage**.
+2. Search for **Neon Alley** and choose **Install and use**.
+3. For the options, install the **Style Settings** plugin (or Style
    Manager) and open its **Neon Alley** section.
+
+To install it by hand instead, create a folder called `Neon Alley` in
+your vault's `.obsidian/themes` folder, copy `manifest.json` and
+`theme.css` into it, then choose **Neon Alley** in **Settings →
+Appearance → Themes**.
 
 ## Working with other plugins
 
 - **Colored Tags**: this plugin colors every tag. Neon Alley overrides
   it for the severity and status tags only, so the rest of your tags
-  keep their plugin colors.
+  keep their plugin colors (and Neon Alley's default tag color applies
+  only with Colored Tags off).
+- **Excalidraw**: it styles its own toolbar and menus (its Dynamic
+  styling setting), so Neon Alley leaves them alone. Use Excalidraw's
+  own settings to match dark drawings to Obsidian's theme.
 - **Code Block Customizer**: set its theme to **Obsidian** so code
   blocks and inline code follow Neon Alley's colors. Its other themes
   use fixed colors of their own.
@@ -157,11 +191,16 @@ by hand:
 ## Build from source
 
 The theme is written in `src/theme.src.css`. The build script adds the
-fonts and writes `theme.css`:
+fonts and the wallpapers and writes `theme.css`:
 
 ```sh
 ./build.sh
 ```
+
+The embedded fonts are a subset of the full Chakra Petch files in
+`src/fonts/full/`, made by `tools/subset-fonts.sh` (it needs
+`fonttools`). The wallpapers are drawn by `tools/skyline.py` and
+`tools/scenes.py`.
 
 ## Credits
 

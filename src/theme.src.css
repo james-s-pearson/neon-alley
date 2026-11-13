@@ -45,7 +45,7 @@ settings:
     -
         id: na-callout-style
         title: Callouts
-        description: "HUD: corner brackets and spaced capitals. Glass: soft glow with a coloured left edge."
+        description: "HUD: corner brackets and spaced capitals. Glass: soft glow with a colored left edge."
         type: class-select
         allowEmpty: false
         default: na-callout-hud
@@ -63,6 +63,194 @@ settings:
         type: class-toggle
         default: false
     -
+        id: na-body-headings
+        title: Use the body font for headings
+        description: "Headings use your text font (Settings → Appearance) instead of Neon Alley's Chakra Petch."
+        type: class-toggle
+        default: false
+    -
+        id: na-normal-case
+        title: Normal-case headings
+        description: "H1, H2 and the note title in normal letters instead of small capitals."
+        type: class-toggle
+        default: false
+    -
+        id: na-corners
+        title: Corners
+        description: "Sharp turns off the rounded corners of panes, frames, code blocks, callouts, buttons, menus and Obsidian's other controls. Tags, toggle switches and slider handles stay round."
+        type: class-select
+        allowEmpty: false
+        default: na-rounded
+        options:
+            -
+                label: Rounded
+                value: na-rounded
+            -
+                label: Sharp
+                value: na-sharp
+    -
+        id: na-h-colors
+        title: "Colors"
+        description: "Optional. Each color has a dark and a light value. An empty color (its default shows as #) keeps the palette's own. Neon Alley's contrast check covers the built-in palettes only, so the readability of custom colors is up to you: bright colors on dark backgrounds read best."
+        type: heading
+        level: 2
+        collapsed: true
+    -
+        id: na-h-accent
+        title: "Accent"
+        description: "Buttons, the active tab, selections, checkboxes and highlights."
+        type: heading
+        level: 3
+        collapsed: true
+    -
+        id: na-obsidian-accent
+        title: "Use Obsidian's accent color"
+        description: "Follows the accent color chosen in Settings → Appearance. A custom accent color below takes priority."
+        type: class-toggle
+        default: false
+    - {id: na-accent, title: "Accent color", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
+        id: na-h-neon
+        title: "Neon colors"
+        description: "Most of the theme is built from these six, so changing one changes every place that uses it. Some palettes use a slot differently (Sodium Rain's green is teal, for example)."
+        type: heading
+        level: 3
+        collapsed: true
+    - {id: na-red, title: "Red", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-orange, title: "Orange", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-gold, title: "Amber", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-green, title: "Green", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-blue, title: "Blue", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-cyan, title: "Cyan", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
+        id: na-h-emphasis
+        title: "Text emphasis"
+        type: heading
+        level: 3
+        collapsed: true
+    - {id: na-bold, title: "Bold", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-italic, title: "Italic", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-bold-italic, title: "Bold italic", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
+        id: na-h-heading-colors
+        title: "Headings"
+        type: heading
+        level: 3
+        collapsed: true
+    - {id: na-h1, title: "Heading 1", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-h2, title: "Heading 2", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-h3, title: "Heading 3", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-h4, title: "Heading 4", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-h5, title: "Heading 5", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-h6, title: "Heading 6", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
+        id: na-h-links
+        title: "Links"
+        type: heading
+        level: 3
+        collapsed: true
+    -
+        id: na-link
+        title: "Links"
+        description: "Internal and external links."
+        type: variable-themed-color
+        format: hex
+        opacity: false
+        default-light: '#'
+        default-dark: '#'
+    -
+        id: na-h-tags
+        title: "Tags"
+        description: "The default tag color and the severity tags. Project status tags (#todo, #in-progress, #blocked, #risk, #decision, #done) follow the neon colors. If the Colored Tags plugin is on, it colors ordinary tags itself; the severity and status tags keep these colors."
+        type: heading
+        level: 3
+        collapsed: true
+    - {id: na-tag, title: "Default tag", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-tag-critical, title: "#critical", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-tag-high, title: "#high", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-tag-medium, title: "#medium", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-tag-low, title: "#low", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-tag-info, title: "#info", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
+        id: na-h-code
+        title: "Code"
+        description: "Code block colors (Tokyo Night by default). The Treelights plugin's Follow Obsidian theme option uses them too."
+        type: heading
+        level: 3
+        collapsed: true
+    - {id: na-code-bg, title: "Background", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-fg, title: "Text", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-comment, title: "Comments", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-keyword, title: "Keywords (const, class, return)", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-control, title: "Control flow (def, function, if, for)", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-import, title: "Imports and decorators", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-function, title: "Functions", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-type, title: "Types and built-ins", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-string, title: "Strings", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-doc, title: "Docstrings", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-number, title: "Numbers, booleans and constants", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-property, title: "Properties", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-operator, title: "Operators", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-bracket, title: "Brackets and punctuation", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-param, title: "Parameters", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-self, title: "self and this", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-code-regex, title: "Regular expressions", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
+        id: na-h-callouts
+        title: "Callouts"
+        description: "Each callout type's color. Built-in groups first, then Neon Alley's security and project callouts."
+        type: heading
+        level: 3
+        collapsed: true
+    - {id: na-co-note, title: "Note, default, example", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-info, title: "Info, abstract, summary, tldr", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-todo, title: "Todo, important", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-tip, title: "Tip, hint, success, check, done", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-warning, title: "Question, help, FAQ, warning, caution, attention", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-danger, title: "Failure, missing, danger, error, bug", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-quote, title: "Quote, cite", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-finding, title: "Finding", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-vuln, title: "Vulnerability", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-ioc, title: "Indicator of compromise", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-recon, title: "Recon", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-cmd, title: "Command", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-flag, title: "Flag", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-risk, title: "Risk", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-decision, title: "Decision", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-blocker, title: "Blocker", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-co-action, title: "Action", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
+        id: na-h-frames
+        title: "Retro frames"
+        description: "The neon frames in the Retro structure."
+        type: heading
+        level: 3
+        collapsed: true
+    - {id: na-frame-head, title: "Header frames", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-frame-body, title: "Content frames", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
+        id: na-h-text-shades
+        title: "Text shades"
+        description: "Advanced. Normal, muted and faint text."
+        type: heading
+        level: 3
+        collapsed: true
+    - {id: na-text, title: "Normal text", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-muted, title: "Muted text", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-faint, title: "Faint text", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
+        id: na-h-bg-shades
+        title: "Background shades"
+        description: "Advanced: the easiest way to make text hard to read, so check your text shades against them."
+        type: heading
+        level: 3
+        collapsed: true
+    - {id: na-frame, title: "Window frame, title bar and status bar", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-side, title: "Sidebars", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-page, title: "Note page", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-raise, title: "Raised surfaces (hover, table headers, inline code)", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    - {id: na-line, title: "Borders", type: variable-themed-color, format: hex, opacity: false, default-light: "#", default-dark: "#"}
+    -
         id: na-h-backdrop
         title: Backdrop and wallpaper
         type: heading
@@ -71,7 +259,7 @@ settings:
     -
         id: na-wallpaper-choice
         title: Wallpaper
-        description: "The image behind the panes. Three are built in. Choose Custom to use your own image (below)."
+        description: "The image behind the panes. Six are built in, in different colors to suit custom colors. Choose Custom to use your own image (below)."
         type: class-select
         allowEmpty: false
         default: na-wall-skyline
@@ -85,6 +273,15 @@ settings:
             -
                 label: Sodium street
                 value: na-wall-sodium
+            -
+                label: Rail line (green)
+                value: na-wall-rail
+            -
+                label: Harbor (ice blue)
+                value: na-wall-harbor
+            -
+                label: Tunnel (red)
+                value: na-wall-tunnel
             -
                 label: Custom
                 value: na-wall-custom
@@ -100,7 +297,7 @@ settings:
     -
         id: na-wallpaper-dim
         title: Wallpaper dimming
-        description: "How much of the palette's frame colour covers the wallpaper. Higher is darker and calmer."
+        description: "How much of the palette's frame color covers the wallpaper. Higher is darker and calmer."
         type: variable-number-slider
         min: 0
         max: 1
@@ -138,10 +335,14 @@ settings:
         level: 2
         collapsed: true
     -
-        id: na-no-glow
-        title: Turn off heading glow
-        type: class-toggle
-        default: false
+        id: na-glow
+        title: Glow strength
+        description: "The glow on H1, H2, the note title and links on hover. 0 turns it off; 1 is the default."
+        type: variable-number-slider
+        min: 0
+        max: 2
+        step: 0.1
+        default: 1
     -
         id: na-prompt-headings
         title: Prompt-style headings
@@ -157,7 +358,7 @@ settings:
     -
         id: na-plain-frames
         title: "Retro: plain frames"
-        description: "Turns the neon frames into plain grey lines without glow."
+        description: "Turns the neon frames into plain gray lines without glow."
         type: class-toggle
         default: false
     -
@@ -181,7 +382,7 @@ settings:
 */
 
 /* ============================================================
-   Neon Alley 0.3.0
+   Neon Alley 1.1.0
    A city street at night. One theme with four palettes, two
    structures (Glass, Retro) and two callout styles, in dark
    and light mode.
@@ -193,8 +394,8 @@ settings:
    (OFL.txt in this folder).
 
    Contents
-     1. Palettes          (edit colours here)
-     2. Core mapping      (which colour does which job)
+     1. Palettes          (edit colors here)
+     2. Core mapping      (which color does which job)
      3. Headings
      4. Note details
      5. Structure: Glass
@@ -205,7 +406,8 @@ settings:
     10. Mission-status tasks
     11. Severity markers
     12. HUD status bar, link glow, scanlines
-    13. Plugins (Calendar, Kanban)
+    12b. Diagrams (Mermaid)
+    13. Plugins (Calendar, Tasks, File Explorer Note Count, Kanban)
     14. Embedded font
    ============================================================ */
 
@@ -251,7 +453,7 @@ settings:
   --accent-s: 100%;
   --accent-l: 55%;
 
-  /* Canvas card colours (r, g, b) */
+  /* Canvas card colors (r, g, b) */
   --canvas-color-1: 255, 59, 48;
   --canvas-color-2: 255, 107, 26;
   --canvas-color-3: 255, 200, 61;
@@ -282,7 +484,7 @@ settings:
   --na-link: var(--na-cyan);
   --na-frame-body: var(--na-green);
 
-  /* Canvas card colours (r, g, b) */
+  /* Canvas card colors (r, g, b) */
   --canvas-color-1: 255, 51, 68;
   --canvas-color-2: 255, 107, 26;
   --canvas-color-3: 255, 210, 63;
@@ -325,7 +527,7 @@ settings:
   --accent-s: 73%;
   --accent-l: 60%;
 
-  /* Canvas card colours (r, g, b) */
+  /* Canvas card colors (r, g, b) */
   --canvas-color-1: 255, 92, 108;
   --canvas-color-2: 255, 122, 61;
   --canvas-color-3: 255, 200, 87;
@@ -368,7 +570,7 @@ settings:
   --accent-s: 100%;
   --accent-l: 77%;
 
-  /* Canvas card colours (r, g, b) */
+  /* Canvas card colors (r, g, b) */
   --canvas-color-1: 255, 92, 108;
   --canvas-color-2: 255, 122, 61;
   --canvas-color-3: 255, 200, 87;
@@ -419,7 +621,7 @@ settings:
   --accent-s: 100%;
   --accent-l: 35%;
 
-  /* Canvas card colours (r, g, b) */
+  /* Canvas card colors (r, g, b) */
   --canvas-color-1: 208, 32, 26;
   --canvas-color-2: 217, 79, 0;
   --canvas-color-3: 168, 107, 0;
@@ -440,7 +642,7 @@ settings:
   --na-link: var(--na-cyan);
   --na-frame-body: var(--na-green);
 
-  /* Canvas card colours (r, g, b) */
+  /* Canvas card colors (r, g, b) */
   --canvas-color-1: 200, 16, 46;
   --canvas-color-2: 217, 79, 0;
   --canvas-color-3: 156, 116, 0;
@@ -483,7 +685,7 @@ settings:
   --accent-s: 100%;
   --accent-l: 23%;
 
-  /* Canvas card colours (r, g, b) */
+  /* Canvas card colors (r, g, b) */
   --canvas-color-1: 198, 47, 63;
   --canvas-color-2: 196, 84, 15;
   --canvas-color-3: 163, 106, 0;
@@ -526,7 +728,7 @@ settings:
   --accent-s: 62%;
   --accent-l: 43%;
 
-  /* Canvas card colours (r, g, b) */
+  /* Canvas card colors (r, g, b) */
   --canvas-color-1: 198, 47, 63;
   --canvas-color-2: 196, 84, 15;
   --canvas-color-3: 163, 106, 0;
@@ -613,7 +815,7 @@ settings:
   --nav-item-color-active: var(--na-accent);
   --nav-item-background-hover: color-mix(in srgb, var(--na-accent) 8%, transparent);
 
-  /* Code: Tokyo Night colours (see section 4b) */
+  /* Code: Tokyo Night colors (see section 4b) */
   --code-background: var(--na-code-bg);
   --code-normal: var(--na-code-fg);
   --code-comment: var(--na-code-comment);
@@ -649,6 +851,85 @@ settings:
   --h6-weight: 600;
 }
 
+/* Colors setting "Use Obsidian's accent color": the accent follows
+   Settings → Appearance. Specificity (0,2,1) beats the palettes
+   (0,2,0); a custom accent color from the settings is written later
+   with the same specificity, so it wins. */
+body.na-obsidian-accent:is(.theme-dark, .theme-light) {
+  --na-accent: hsl(var(--accent-h), var(--accent-s), var(--accent-l));
+}
+
+/* Look settings: heading font, letter case, glow, corners */
+:is(.theme-dark, .theme-light) {
+  --na-glow: 1;
+  --na-r-code: 8px;
+  --na-r-pane: 14px;
+  --na-r-button: 6px;
+  --na-r-hud: 2px;
+  --na-r-glass-callout: 12px;
+  --na-r-lane: 6px;
+  --na-r-card: 4px;
+}
+body.na-body-headings:is(.theme-dark, .theme-light) {
+  --na-heading-font: var(--font-text);
+}
+/* Kept for anyone who turned glow off in 1.0 (the setting was replaced
+   by the Glow strength slider in 1.1) */
+body.na-no-glow:is(.theme-dark, .theme-light) {
+  --na-glow: 0;
+}
+:is(.theme-dark, .theme-light).na-sharp {
+  --na-r-code: 0;
+  --na-r-pane: 0;
+  --na-r-button: 0;
+  --na-r-hud: 0;
+  --na-r-glass-callout: 0;
+  --na-r-lane: 0;
+  --na-r-card: 0;
+  --radius-s: 0;
+  --radius-m: 0;
+  --radius-l: 0;
+  --radius-xl: 0;
+  --tab-radius: 0;
+  --tab-radius-active: 0;
+  --tab-curve: 0;
+  --status-bar-radius: 0;
+  --button-radius: 0;
+  --callout-radius: 0;
+  --checkbox-radius: 0;
+  --code-radius: 0;
+  --clickable-icon-radius: 0;
+  --embed-action-radius: 0;
+  --embed-actions-radius: 0;
+  --image-radius: 0;
+  --input-radius: 0;
+  --search-input-radius: 0;
+  --nav-item-radius: 0;
+  --notice-radius: 0;
+  --menu-radius: 0;
+  --modal-radius: 0;
+  --setting-items-radius: 0;
+  --tooltip-radius: 0;
+  --tab-switcher-preview-radius: 0;
+  --vault-profile-radius: 0;
+  --metadata-property-radius: 0;
+  --metadata-property-radius-hover: 0;
+  --metadata-property-radius-focus: 0;
+  --mermaid-radius: 0;
+  --footnote-radius: 0;
+  --canvas-controls-radius: 0;
+  --table-selection-border-radius: 0;
+  --hotkey-radius: 0;
+  --bases-embed-border-radius: 0;
+  --bases-table-container-border-radius: 0;
+  --bases-cards-radius: 0;
+  --bases-kanban-column-radius: 0;
+  --bases-kanban-card-radius: 0;
+}
+:is(.theme-dark, .theme-light).na-sharp.na-retro {
+  --na-retro-radius: 0;
+}
+
 /* Active tab: accent line along the top */
 :is(.theme-dark, .theme-light) .workspace-tab-header.is-active {
   box-shadow: inset 0 2px 0 var(--na-accent);
@@ -665,8 +946,17 @@ settings:
   font-variant: small-caps;
   letter-spacing: 0.05em;
 }
+/* Look setting "Normal-case headings" */
+:is(.theme-dark, .theme-light).na-normal-case :is(
+  .markdown-rendered :is(h1, h2),
+  .cm-line:is(.HyperMD-header-1, .HyperMD-header-2),
+  .inline-title
+) {
+  font-variant: normal;
+  letter-spacing: normal;
+}
 
-/* Hairline under H1, H2 and the note title, in the heading's colour */
+/* Hairline under H1, H2 and the note title, in the heading's color */
 :is(.theme-dark, .theme-light) :is(.markdown-rendered h1, .cm-line.HyperMD-header-1, .inline-title) {
   border-bottom: 1px solid color-mix(in srgb, var(--na-h1) 55%, transparent);
   padding-bottom: 0.2em;
@@ -682,7 +972,7 @@ settings:
   .cm-line:is(.HyperMD-header-1, .HyperMD-header-2),
   .inline-title
 ) {
-  text-shadow: 0 0 14px color-mix(in srgb, currentColor 50%, transparent);
+  text-shadow: 0 0 calc(14px * var(--na-glow)) color-mix(in srgb, currentColor min(100%, calc(50% * var(--na-glow))), transparent);
 }
 
 /* Optional prompt-style prefix */
@@ -697,7 +987,7 @@ settings:
 
 /* ---------- 4. Note details ---------- */
 
-/* inline code only: code blocks (pre > code) keep the code theme's colours */
+/* inline code only: code blocks (pre > code) keep the code theme's colors */
 :is(.theme-dark, .theme-light) :is(.markdown-rendered :not(pre) > code, .cm-s-obsidian span.cm-inline-code) {
   color: var(--na-accent);
   background-color: var(--na-raise);
@@ -712,16 +1002,16 @@ settings:
 
 :is(.theme-dark, .theme-light) .markdown-rendered pre {
   border: 1px solid var(--na-line);
-  border-radius: 8px;
+  border-radius: var(--na-r-code);
 }
 
 /* ---------- 4a. Code: Tokyo Night ----------
-   Syntax colours match LazyVim's default colour scheme, Tokyo
+   Syntax colors match LazyVim's default color scheme, Tokyo
    Night (moon in dark mode, day in light mode), checked token by
    token against Neovim's Tree-sitter highlights. Obsidian's two
    highlighters (CodeMirror while editing, Prism in Reading view)
    know fewer token kinds than Tree-sitter, so a few kinds share a
-   colour; see the README. */
+   color; see the README. */
 
 .theme-dark {
   --na-code-bg: #222436;      /* Tokyo Night moon background */
@@ -765,9 +1055,12 @@ settings:
 /* Editing view (CodeMirror) */
 :is(.theme-dark, .theme-light) .cm-s-obsidian :is(.HyperMD-codeblock, .cm-line) {
   & span.cm-keyword { color: var(--na-code-keyword); }
-  /* Italic only when no highlighter plugin (such as Shiki) has
-     styled the token inside; it sets its own italics */
-  & span.cm-keyword:not(:has(span)) { font-style: italic; }
+  /* Keywords are italic. When a highlighter plugin (such as Shiki or
+     Treelights) wraps the keyword in its own span, that span decides:
+     the reset below sits inside :where(), so it has no specificity and
+     any style the plugin sets (a class or an inline style) wins.
+     Replaces a has-selector rule (flagged by Obsidian's theme review). */
+  & span.cm-keyword { font-style: italic; }
   & span.cm-def { color: var(--na-code-function); }
   & span:is(.cm-builtin, .cm-type, .cm-variable-3) { color: var(--na-code-type); }
   & span:is(.cm-number, .cm-atom) { color: var(--na-code-number); }
@@ -801,11 +1094,15 @@ settings:
   & .token.tag { color: var(--na-code-function); }
 }
 
+:where(.cm-s-obsidian :is(.HyperMD-codeblock, .cm-line) span.cm-keyword) > span {
+  font-style: normal;
+}
+
 /* ---------- 4b. Backdrop and wallpaper ----------
    The theme paints the space behind the panes itself, so it does
-   not depend on the macOS window material (which turns light grey
+   not depend on the macOS window material (which turns light gray
    when macOS is in light mode). A wallpaper sits under a layer of
-   the frame colour. When Obsidian's "Translucent window" setting
+   the frame color. When Obsidian's "Translucent window" setting
    is on, the panes turn see-through and blur the wallpaper; when
    it is off, they are solid. --na-skyline is added by build.sh. */
 
@@ -832,6 +1129,15 @@ settings:
 }
 :is(.theme-dark, .theme-light).na-wall-sodium {
   --na-wallpaper: var(--na-sodium, none);
+}
+:is(.theme-dark, .theme-light).na-wall-rail {
+  --na-wallpaper: var(--na-rail, none);
+}
+:is(.theme-dark, .theme-light).na-wall-harbor {
+  --na-wallpaper: var(--na-harbor, none);
+}
+:is(.theme-dark, .theme-light).na-wall-tunnel {
+  --na-wallpaper: var(--na-tunnel, none);
 }
 :is(.theme-dark, .theme-light).na-wall-custom {
   --na-wallpaper: var(--na-wallpaper-custom);
@@ -894,7 +1200,7 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 }
 
 :is(.theme-dark, .theme-light):not(.na-retro):not(.na-flat-panes) .workspace-leaf-content {
-  border-radius: 14px;
+  border-radius: var(--na-r-pane);
   border: 1px solid color-mix(in srgb, var(--na-accent) 14%, transparent);
   overflow: hidden;
   background-image: var(--na-sheen);
@@ -1016,7 +1322,7 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
   .side-dock-ribbon-action
 ) {
   border: 1px solid var(--na-line);
-  border-radius: 6px;
+  border-radius: var(--na-r-button);
   background-color: var(--na-raise);
   box-shadow:
     inset 0 1px 0 color-mix(in srgb, white 10%, transparent),
@@ -1047,11 +1353,31 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 }
 
 /* ---------- 7. Callouts ----------
-   Each callout type sets --na-cc, a full colour. The look comes
+   Each callout type sets --na-cc, a full color. The look comes
    from the style below (HUD or Glass). */
 
+:is(.theme-dark, .theme-light) {
+  --na-co-note: var(--na-blue);
+  --na-co-info: var(--na-cyan);
+  --na-co-todo: var(--na-orange);
+  --na-co-tip: var(--na-green);
+  --na-co-warning: var(--na-gold);
+  --na-co-danger: var(--na-red);
+  --na-co-quote: var(--na-faint);
+  --na-co-finding: var(--na-orange);
+  --na-co-vuln: var(--na-red);
+  --na-co-ioc: var(--na-gold);
+  --na-co-recon: var(--na-blue);
+  --na-co-cmd: var(--na-green);
+  --na-co-flag: var(--na-green);
+  --na-co-risk: var(--na-orange);
+  --na-co-decision: var(--na-blue);
+  --na-co-blocker: var(--na-red);
+  --na-co-action: var(--na-cyan);
+}
+
 :is(.theme-dark, .theme-light) .callout {
-  --na-cc: var(--na-blue);
+  --na-cc: var(--na-co-note);
   color: var(--na-text);
 }
 :is(.theme-dark, .theme-light) .callout :is(.callout-title, .callout-icon, .callout-fold) {
@@ -1064,7 +1390,7 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 
 /* HUD: thin border, faint fill, corner brackets, spaced capitals */
 :is(.theme-dark, .theme-light):not(.na-callout-glass) .callout {
-  border-radius: 2px;
+  border-radius: var(--na-r-hud);
   border: 1px solid color-mix(in srgb, var(--na-cc) 45%, transparent);
   background:
     linear-gradient(var(--na-cc), var(--na-cc)) top left / 12px 2px no-repeat,
@@ -1079,9 +1405,9 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
   font-size: 0.85em;
 }
 
-/* Glass: soft glow with a coloured left edge */
+/* Glass: soft glow with a colored left edge */
 :is(.theme-dark, .theme-light).na-callout-glass .callout {
-  border-radius: 12px;
+  border-radius: var(--na-r-glass-callout);
   border: 1px solid color-mix(in srgb, var(--na-cc) 30%, transparent);
   border-left: 3px solid var(--na-cc);
   background: color-mix(in srgb, var(--na-cc) 8%, transparent);
@@ -1089,39 +1415,50 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 }
 
 /* Built-in types */
-:is(.theme-dark, .theme-light) .callout:is([data-callout="note"], [data-callout="default"], [data-callout="example"]) { --na-cc: var(--na-blue); }
-:is(.theme-dark, .theme-light) .callout:is([data-callout="info"], [data-callout="abstract"], [data-callout="summary"], [data-callout="tldr"]) { --na-cc: var(--na-cyan); }
-:is(.theme-dark, .theme-light) .callout:is([data-callout="todo"], [data-callout="important"]) { --na-cc: var(--na-orange); }
-:is(.theme-dark, .theme-light) .callout:is([data-callout="tip"], [data-callout="hint"], [data-callout="success"], [data-callout="check"], [data-callout="done"]) { --na-cc: var(--na-green); }
-:is(.theme-dark, .theme-light) .callout:is([data-callout="question"], [data-callout="help"], [data-callout="faq"], [data-callout="warning"], [data-callout="caution"], [data-callout="attention"]) { --na-cc: var(--na-gold); }
-:is(.theme-dark, .theme-light) .callout:is([data-callout="failure"], [data-callout="fail"], [data-callout="missing"], [data-callout="danger"], [data-callout="error"], [data-callout="bug"]) { --na-cc: var(--na-red); }
-:is(.theme-dark, .theme-light) .callout:is([data-callout="quote"], [data-callout="cite"]) { --na-cc: var(--na-faint); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="note"], [data-callout="default"], [data-callout="example"]) { --na-cc: var(--na-co-note); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="info"], [data-callout="abstract"], [data-callout="summary"], [data-callout="tldr"]) { --na-cc: var(--na-co-info); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="todo"], [data-callout="important"]) { --na-cc: var(--na-co-todo); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="tip"], [data-callout="hint"], [data-callout="success"], [data-callout="check"], [data-callout="done"]) { --na-cc: var(--na-co-tip); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="question"], [data-callout="help"], [data-callout="faq"], [data-callout="warning"], [data-callout="caution"], [data-callout="attention"]) { --na-cc: var(--na-co-warning); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="failure"], [data-callout="fail"], [data-callout="missing"], [data-callout="danger"], [data-callout="error"], [data-callout="bug"]) { --na-cc: var(--na-co-danger); }
+:is(.theme-dark, .theme-light) .callout:is([data-callout="quote"], [data-callout="cite"]) { --na-cc: var(--na-co-quote); }
 
 /* Security: > [!finding], [!vuln], [!ioc], [!recon], [!cmd], [!flag] */
-:is(.theme-dark, .theme-light) .callout[data-callout="finding"] { --na-cc: var(--na-orange); --callout-icon: lucide-crosshair; }
-:is(.theme-dark, .theme-light) .callout[data-callout="vuln"] { --na-cc: var(--na-red); --callout-icon: lucide-shield-alert; }
-:is(.theme-dark, .theme-light) .callout[data-callout="ioc"] { --na-cc: var(--na-gold); --callout-icon: lucide-fingerprint; }
-:is(.theme-dark, .theme-light) .callout[data-callout="recon"] { --na-cc: var(--na-blue); --callout-icon: lucide-radar; }
-:is(.theme-dark, .theme-light) .callout[data-callout="cmd"] { --na-cc: var(--na-green); --callout-icon: lucide-terminal; }
+:is(.theme-dark, .theme-light) .callout[data-callout="finding"] { --na-cc: var(--na-co-finding); --callout-icon: lucide-crosshair; }
+:is(.theme-dark, .theme-light) .callout[data-callout="vuln"] { --na-cc: var(--na-co-vuln); --callout-icon: lucide-shield-alert; }
+:is(.theme-dark, .theme-light) .callout[data-callout="ioc"] { --na-cc: var(--na-co-ioc); --callout-icon: lucide-fingerprint; }
+:is(.theme-dark, .theme-light) .callout[data-callout="recon"] { --na-cc: var(--na-co-recon); --callout-icon: lucide-radar; }
+:is(.theme-dark, .theme-light) .callout[data-callout="cmd"] { --na-cc: var(--na-co-cmd); --callout-icon: lucide-terminal; }
 :is(.theme-dark, .theme-light) .callout[data-callout="cmd"] .callout-content { font-family: var(--font-monospace); }
 
 /* [!flag] stays blurred until you hover, so flags and secrets
    stay hidden in screenshots */
-:is(.theme-dark, .theme-light) .callout[data-callout="flag"] { --na-cc: var(--na-green); --callout-icon: lucide-flag; }
+:is(.theme-dark, .theme-light) .callout[data-callout="flag"] { --na-cc: var(--na-co-flag); --callout-icon: lucide-flag; }
 :is(.theme-dark, .theme-light) .callout[data-callout="flag"] .callout-content { filter: blur(6px); transition: filter 0.2s ease; }
 :is(.theme-dark, .theme-light) .callout[data-callout="flag"]:hover .callout-content { filter: none; }
 
 /* Project: > [!risk], [!decision], [!blocker], [!action], [!done] */
-:is(.theme-dark, .theme-light) .callout[data-callout="risk"] { --na-cc: var(--na-orange); --callout-icon: lucide-triangle-alert; }
-:is(.theme-dark, .theme-light) .callout[data-callout="decision"] { --na-cc: var(--na-blue); --callout-icon: lucide-git-branch; }
-:is(.theme-dark, .theme-light) .callout[data-callout="blocker"] { --na-cc: var(--na-red); --callout-icon: lucide-octagon-x; }
-:is(.theme-dark, .theme-light) .callout[data-callout="action"] { --na-cc: var(--na-cyan); --callout-icon: lucide-list-todo; }
+:is(.theme-dark, .theme-light) .callout[data-callout="risk"] { --na-cc: var(--na-co-risk); --callout-icon: lucide-triangle-alert; }
+:is(.theme-dark, .theme-light) .callout[data-callout="decision"] { --na-cc: var(--na-co-decision); --callout-icon: lucide-git-branch; }
+:is(.theme-dark, .theme-light) .callout[data-callout="blocker"] { --na-cc: var(--na-co-blocker); --callout-icon: lucide-octagon-x; }
+:is(.theme-dark, .theme-light) .callout[data-callout="action"] { --na-cc: var(--na-co-action); --callout-icon: lucide-list-todo; }
 :is(.theme-dark, .theme-light) .callout[data-callout="done"] { --callout-icon: lucide-circle-check; }
 
-/* ---------- 8. Tags ---------- */
+/* ---------- 8. Tags ----------
+   The default and severity colors are variables so the Colors
+   settings can change them; the defaults are the palette's. */
+
+:is(.theme-dark, .theme-light) {
+  --na-tag: var(--na-cyan);
+  --na-tag-critical: var(--na-red);
+  --na-tag-high: var(--na-orange);
+  --na-tag-medium: var(--na-gold);
+  --na-tag-low: var(--na-green);
+  --na-tag-info: var(--na-blue);
+}
 
 :is(.theme-dark, .theme-light) :is(.tag, .cm-hashtag, .multi-select-pill) {
-  --na-tc: var(--na-cyan);
+  --na-tc: var(--na-tag);
   --tag-color: var(--na-tc);
   --tag-color-hover: var(--na-tc);
   --tag-background: color-mix(in srgb, var(--na-tc) 15%, transparent);
@@ -1129,11 +1466,11 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 }
 
 /* Severity */
-:is(.theme-dark, .theme-light) :is(.tag[href="#critical" i], .cm-hashtag.cm-tag-critical, .multi-select-pill.colored-tag-critical) { --na-tc: var(--na-red); }
-:is(.theme-dark, .theme-light) :is(.tag[href="#high" i], .cm-hashtag.cm-tag-high, .multi-select-pill.colored-tag-high) { --na-tc: var(--na-orange); }
-:is(.theme-dark, .theme-light) :is(.tag[href="#medium" i], .cm-hashtag.cm-tag-medium, .multi-select-pill.colored-tag-medium) { --na-tc: var(--na-gold); }
-:is(.theme-dark, .theme-light) :is(.tag[href="#low" i], .cm-hashtag.cm-tag-low, .multi-select-pill.colored-tag-low) { --na-tc: var(--na-green); }
-:is(.theme-dark, .theme-light) :is(.tag[href="#info" i], .cm-hashtag.cm-tag-info, .multi-select-pill.colored-tag-info) { --na-tc: var(--na-blue); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#critical" i], .cm-hashtag.cm-tag-critical, .multi-select-pill.colored-tag-critical) { --na-tc: var(--na-tag-critical); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#high" i], .cm-hashtag.cm-tag-high, .multi-select-pill.colored-tag-high) { --na-tc: var(--na-tag-high); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#medium" i], .cm-hashtag.cm-tag-medium, .multi-select-pill.colored-tag-medium) { --na-tc: var(--na-tag-medium); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#low" i], .cm-hashtag.cm-tag-low, .multi-select-pill.colored-tag-low) { --na-tc: var(--na-tag-low); }
+:is(.theme-dark, .theme-light) :is(.tag[href="#info" i], .cm-hashtag.cm-tag-info, .multi-select-pill.colored-tag-info) { --na-tc: var(--na-tag-info); }
 
 /* Project status */
 :is(.theme-dark, .theme-light) :is(.tag[href="#todo" i], .cm-hashtag.cm-tag-todo, .multi-select-pill.colored-tag-todo) { --na-tc: var(--na-cyan); }
@@ -1172,9 +1509,9 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 
 /* ---------- 10. Mission-status tasks ----------
    - [/] in progress   - [!] urgent     - [?] question
-   - [>] deferred      - [-] cancelled
+   - [>] deferred      - [-] canceled
    Custom states keep their text readable (no strike-through),
-   except cancelled. */
+   except canceled. */
 
 :is(.theme-dark, .theme-light) :is(li, .HyperMD-task-line):is([data-task="/"], [data-task="!"], [data-task="?"], [data-task=">"]) {
   --checklist-done-decoration: none;
@@ -1183,7 +1520,7 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 :is(.theme-dark, .theme-light) :is(li, .HyperMD-task-line)[data-task="-"] {
   --checklist-done-color: var(--na-faint);
 }
-/* cancelled tasks: faded and struck through (Obsidian 1.15 only styles
+/* canceled tasks: faded and struck through (Obsidian 1.15 only styles
    "x" as done by itself) */
 :is(.theme-dark, .theme-light) li[data-task="-"],
 :is(.theme-dark, .theme-light) .HyperMD-task-line[data-task="-"] {
@@ -1226,7 +1563,7 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 
 /* ---------- 11. Severity markers ----------
    A small shape before each severity tag, so the level reads
-   without relying on colour alone. */
+   without relying on color alone. */
 
 :is(.theme-dark, .theme-light) :is(.tag[href="#critical" i], .cm-hashtag-begin.cm-tag-critical)::before { content: "◆ "; }
 :is(.theme-dark, .theme-light) :is(.tag[href="#high" i], .cm-hashtag-begin.cm-tag-high)::before { content: "▲ "; }
@@ -1255,7 +1592,7 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 }
 
 :is(.theme-dark, .theme-light):not(.na-no-glow) :is(.markdown-rendered a, .cm-hmd-internal-link, .cm-link, .cm-url):hover {
-  text-shadow: 0 0 8px color-mix(in srgb, currentColor 60%, transparent);
+  text-shadow: 0 0 calc(8px * var(--na-glow)) color-mix(in srgb, currentColor min(100%, calc(60% * var(--na-glow))), transparent);
   transition: text-shadow 0.15s ease;
 }
 
@@ -1276,6 +1613,33 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 @media (prefers-reduced-motion: reduce) {
   :is(.theme-dark, .theme-light) :is(.markdown-rendered a, .cm-hmd-internal-link, .cm-link, .cm-url) { transition: none; }
   :is(.theme-dark, .theme-light) .callout[data-callout="flag"] .callout-content { transition: none; }
+}
+
+/* ---------- 12b. Diagrams (Mermaid) ----------
+   Obsidian 1.15 draws Mermaid diagrams with a renderer that reads
+   its --mermaid-* variables, so the theme only sets those: node
+   outlines in the accent, lines in cyan, chart series from the
+   neon colors. Built from the palette, so the Colors settings
+   apply here too. */
+:is(.theme-dark, .theme-light) {
+  --mermaid-border-color: var(--na-accent);
+  --mermaid-line-color: var(--na-cyan);
+  --mermaid-accent: var(--na-accent);
+  --mermaid-critical: var(--na-red);
+  --mermaid-error: var(--na-red);
+  --mermaid-radius: var(--na-r-card);
+  --mermaid-color-1: var(--na-orange);
+  --mermaid-color-2: var(--na-cyan);
+  --mermaid-color-3: var(--na-gold);
+  --mermaid-color-4: var(--na-green);
+  --mermaid-color-5: var(--na-blue);
+  --mermaid-color-6: var(--na-red);
+  --mermaid-color-7: var(--na-bold-italic);
+  --mermaid-color-8: var(--na-italic);
+}
+/* A soft neon glow on diagram shapes (dark mode; Glow strength) */
+.theme-dark .pele .pele-node > :is(rect, polygon, circle, ellipse, path) {
+  filter: drop-shadow(0 0 calc(4px * var(--na-glow)) color-mix(in srgb, var(--na-accent) min(100%, calc(35% * var(--na-glow))), transparent));
 }
 
 /* ---------- 13. Plugins ---------- */
@@ -1301,12 +1665,30 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
   letter-spacing: 0.05em;
 }
 
+/* Tasks: overdue due dates in red, due today in amber */
+:is(.theme-dark, .theme-light) .task-due[data-task-due^="past-"] {
+  color: var(--na-red);
+}
+:is(.theme-dark, .theme-light) .task-due[data-task-due="today"] {
+  color: var(--na-gold);
+}
+
+/* File Explorer Note Count: HUD-style counters */
+:is(.theme-dark, .theme-light) .nav-folder-title[data-count]::after {
+  font-family: var(--font-monospace);
+  font-size: 0.75em;
+  color: var(--na-faint);
+  background-color: color-mix(in srgb, var(--na-accent) 10%, transparent);
+  border-radius: var(--na-r-card);
+  padding: 0 0.5em;
+}
+
 /* Kanban: HUD lanes and cards */
 :is(.theme-dark, .theme-light) .kanban-plugin__lane {
   background-color: var(--na-side);
   border: 1px solid var(--na-line);
   border-top: 2px solid var(--na-accent);
-  border-radius: 6px;
+  border-radius: var(--na-r-lane);
 }
 :is(.theme-dark, .theme-light) .kanban-plugin__lane-title {
   font-family: var(--na-heading-font);
@@ -1316,7 +1698,7 @@ body.is-translucent:not(.is-fullscreen):is(.theme-dark, .theme-light).na-retro :
 :is(.theme-dark, .theme-light) .kanban-plugin__item {
   background-color: var(--na-page);
   border: 1px solid var(--na-line);
-  border-radius: 4px;
+  border-radius: var(--na-r-card);
 }
 :is(.theme-dark, .theme-light) .kanban-plugin__item:hover {
   border-color: color-mix(in srgb, var(--na-accent) 60%, transparent);

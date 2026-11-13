@@ -1,12 +1,14 @@
 #!/usr/bin/env python3
-"""Draw the "Rain alley" and "Sodium street" wallpapers as SVG files.
+"""Draw the scene wallpapers as SVG files: "Rain alley", "Sodium street",
+"Rail line", "Harbor" and "Tunnel".
 
-Two night scenes in the Neon Alley colours, drawn from simple shapes.
+Two night scenes in the Neon Alley colors, drawn from simple shapes.
 Signs carry made-up glyphs, not real text. The random seed is fixed,
 so the same images come out every time.
 
 Usage: python3 tools/scenes.py src/wallpapers/
-Writes rain-alley.svg and sodium-street.svg into that folder.
+Writes rain-alley.svg, sodium-street.svg, rail-line.svg, harbor.svg and
+tunnel.svg into that folder.
 """
 import os
 import random
@@ -34,7 +36,7 @@ def defs_common():
     )
 
 
-def glyphs(rng, x, y, w, h, colour, vertical):
+def glyphs(rng, x, y, w, h, color, vertical):
     """Made-up neon glyphs: two or three strokes on a 3 x 3 grid each."""
     n = max(2, int((h if vertical else w) // 30))
     size = (w - 14) if vertical else min(h - 12, (w - 14) / n - 6)
@@ -49,11 +51,11 @@ def glyphs(rng, x, y, w, h, colour, vertical):
                      f"L{gx + c * size / 2:.1f} {gy + e * size / 2:.1f}")
     return (f'<g filter="url(#glow)"><rect x="{x:.1f}" y="{y:.1f}" '
             f'width="{w:.1f}" height="{h:.1f}" rx="4" fill="#08070e" '
-            f'stroke="{colour}" stroke-width="2.5"/>'
-            f'<path d="{"".join(d)}" stroke="{colour}" stroke-width="2.6" '
+            f'stroke="{color}" stroke-width="2.5"/>'
+            f'<path d="{"".join(d)}" stroke="{color}" stroke-width="2.6" '
             'stroke-linecap="round" fill="none"/></g>'
             f'<rect x="{x - 50:.1f}" y="{y - 50:.1f}" width="{w + 100:.1f}" '
-            f'height="{h + 100:.1f}" fill="{colour}" opacity="0.14" '
+            f'height="{h + 100:.1f}" fill="{color}" opacity="0.14" '
             'filter="url(#soft)"/>')
 
 
@@ -293,9 +295,174 @@ def sodium_street():
     return "".join(p)
 
 
+# ---------------------------------------------------------------------
+def _head(sky_top, sky_bottom, extra=""):
+    return (f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" '
+            f'width="{W}" height="{H}" preserveAspectRatio="xMidYMax slice">'
+            '<defs>' + defs_common() +
+            '<linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">'
+            f'<stop offset="0" stop-color="{sky_top}"/>'
+            f'<stop offset="1" stop-color="{sky_bottom}"/></linearGradient>'
+            + extra + '</defs>'
+            f'<rect width="{W}" height="{H}" fill="url(#sky)"/>')
+
+
+def _windows(rng, boxes, colors, share):
+    """Lit windows for a list of (x, y, w, h) buildings, one path per color."""
+    paths = {c: [] for c in colors}
+    for x, y, w, h in boxes:
+        for wy in range(int(y) + 12, int(y + h) - 10, 16):
+            for wx in range(int(x) + 6, int(x + w) - 8, 12):
+                if rng.random() < share:
+                    paths[rng.choice(colors)].append(f"M{wx} {wy}h5v7h-5z")
+    return "".join(f'<path d="{"".join(d)}" fill="{c}" opacity="0.55"/>'
+                   for c, d in paths.items() if d)
+
+
+def rail_line():
+    """An elevated rail line crossing a green-lit district."""
+    rng = random.Random(2077)
+    green = ["#b6ff3b", "#3dff9a", "#2fd6c3"]
+    p = [_head("#050b08", "#12301f",
+               '<radialGradient id="haze" cx="0.5" cy="0.75" r="0.6">'
+               '<stop offset="0" stop-color="#3dff9a" stop-opacity="0.22"/>'
+               '<stop offset="1" stop-color="#3dff9a" stop-opacity="0"/>'
+               '</radialGradient>')]
+    p.append(f'<rect width="{W}" height="{H}" fill="url(#haze)"/>')
+    # far skyline
+    far = []
+    x = -20
+    while x < W:
+        w, h = rng.randint(50, 120), rng.randint(160, 420)
+        far.append((x, 760 - h, w, h)); x += w + rng.randint(2, 10)
+    p.append('<path d="' + "".join(f"M{x} {y}h{w}v{h}h{-w}z" for x, y, w, h in far)
+             + '" fill="#08140e"/>')
+    p.append(_windows(rng, far, ["#3dff9a", "#b6ff3b", "#c8ffd8"], 0.07))
+    # the elevated track: deck, rails and pillars
+    p.append(f'<rect x="0" y="560" width="{W}" height="34" fill="#0a120d"/>')
+    p.append(f'<rect x="0" y="556" width="{W}" height="4" fill="#3dff9a" opacity="0.5" filter="url(#glow)"/>')
+    p.append('<path d="' + "".join(f"M{x} 594h28v{H - 594}h-28z" for x in range(60, W, 300))
+             + '" fill="#07100b"/>')
+    # a passing train with lit windows
+    p.append('<rect x="420" y="508" width="900" height="50" rx="6" fill="#0d1a13"/>')
+    p.append('<path d="' + "".join(f"M{x} 520h40v18h-40z" for x in range(440, 1300, 58))
+             + '" fill="#c8ffd8" opacity="0.7"/>')
+    p.append('<rect x="420" y="500" width="900" height="70" fill="#3dff9a" opacity="0.10" filter="url(#soft)"/>')
+    # neon signs under the track and on the buildings
+    signs = [(140, 300, 46, 180, green[0], True), (1700, 260, 46, 200, green[2], True),
+             (760, 640, 220, 40, green[1], False), (1180, 340, 160, 36, green[0], False)]
+    for x, y, w, h, c, v in signs:
+        p.append(glyphs(rng, x, y, w, h, c, v))
+    # wet street and reflections
+    p.append(f'<rect x="0" y="758" width="{W}" height="{H - 758}" fill="#040806" opacity="0.9"/>')
+    for x, y, w, h, c, v in signs:
+        p.append(f'<rect x="{x}" y="780" width="{w}" height="{h * 1.1:.0f}" fill="{c}" '
+                 'opacity="0.18" filter="url(#streak)"/>')
+    p.append(f'<rect width="{W}" height="{H}" fill="url(#rain)"/>')
+    p.append('</svg>')
+    return "".join(p)
+
+
+def harbor():
+    """Cranes and container stacks over cold harbor water."""
+    rng = random.Random(1999)
+    ice = ["#4da3ff", "#9fe9ff", "#c9d6ff"]
+    p = [_head("#04070f", "#10233a",
+               '<linearGradient id="water" x1="0" y1="0" x2="0" y2="1">'
+               '<stop offset="0" stop-color="#0b1a2c"/>'
+               '<stop offset="1" stop-color="#03060c"/></linearGradient>')]
+    horizon = 700
+    # container stacks along the quay
+    boxes = []
+    x = 0
+    while x < W:
+        w = rng.randint(70, 140); rows = rng.randint(2, 5)
+        for r in range(rows):
+            boxes.append((x, horizon - 30 * (r + 1), w, 28,
+                          rng.choice(["#16263f", "#1c3050", "#1a2a44", "#223a5e"])))
+        x += w + rng.randint(4, 30)
+    for c in sorted({b[4] for b in boxes}):
+        p.append('<path d="' + "".join(f"M{x} {y}h{w}v{h}h{-w}z" for x, y, w, h, cc in boxes if cc == c)
+                 + f'" fill="{c}"/>')
+    # gantry cranes
+    for cx in (260, 980, 1560):
+        h = rng.randint(330, 420)
+        p.append(f'<path d="M{cx} {horizon}V{horizon - h}M{cx + 90} {horizon}V{horizon - h}'
+                 f'M{cx - 160} {horizon - h}H{cx + 300}M{cx} {horizon - h + 60}L{cx + 90} {horizon - h}'
+                 f'M{cx + 90} {horizon - h + 60}L{cx} {horizon - h}" stroke="#24385a" '
+                 'stroke-width="12" fill="none"/>')
+        p.append(f'<circle cx="{cx + 300}" cy="{horizon - h}" r="5" fill="#ff3b30" filter="url(#glow)"/>')
+        p.append(f'<rect x="{cx - 160}" y="{horizon - h - 3}" width="460" height="3" fill="{ice[1]}" opacity="0.6" filter="url(#glow)"/>')
+    # quay lights
+    for x in range(40, W, 110):
+        p.append(f'<circle cx="{x}" cy="{horizon - 4}" r="3" fill="{rng.choice(ice)}" filter="url(#glow)"/>')
+    # signs on the warehouse
+    for x, y, w, h, c, v in [(620, 470, 180, 36, ice[0], False), (1320, 430, 46, 190, ice[1], True), (90, 440, 46, 170, ice[2], True)]:
+        p.append(glyphs(rng, x, y, w, h, c, v))
+    # water with light streaks
+    p.append(f'<rect x="0" y="{horizon}" width="{W}" height="{H - horizon}" fill="url(#water)"/>')
+    for x in range(40, W, 110):
+        p.append(f'<rect x="{x - 3}" y="{horizon + 6}" width="6" height="{rng.randint(120, 260)}" '
+                 f'fill="{rng.choice(ice)}" opacity="0.25" filter="url(#streak)"/>')
+    p.append('<path d="' + "".join(f"M{rng.randint(0, W)} {rng.randint(horizon + 20, H)}h{rng.randint(40, 160)}"
+                                   for _ in range(40)) + '" stroke="#9fe9ff" stroke-width="1.5" opacity="0.12"/>')
+    p.append(f'<rect width="{W}" height="{H}" fill="url(#rain)"/>')
+    p.append('</svg>')
+    return "".join(p)
+
+
+def tunnel():
+    """A road tunnel full of brake lights."""
+    rng = random.Random(1982)
+    vx, vy = 960, 560
+    p = [_head("#0a0405", "#1c0709",
+               '<radialGradient id="mouth" cx="0.5" cy="0.52" r="0.3">'
+               '<stop offset="0" stop-color="#ff3344" stop-opacity="0.35"/>'
+               '<stop offset="1" stop-color="#ff3344" stop-opacity="0"/>'
+               '</radialGradient>')]
+    # tunnel walls as rings receding to the vanishing point
+    for k in range(10):
+        t = 0.8 ** k
+        w, h = 1100 * t + 120, 760 * t + 80
+        op = 0.08 + 0.05 * (1 - t)
+        p.append(f'<rect x="{vx - w / 2:.0f}" y="{vy - h * 0.62:.0f}" width="{w:.0f}" height="{h:.0f}" '
+                 f'rx="{w * 0.18:.0f}" fill="none" stroke="#ff3344" stroke-width="{3 * t + 1:.1f}" opacity="{op:.2f}"/>')
+    p.append(f'<rect width="{W}" height="{H}" fill="url(#mouth)"/>')
+    # road
+    p.append(f'<polygon points="{vx - 60},{vy + 40} {vx + 60},{vy + 40} {W + 200},{H} -200,{H}" fill="#0d0607"/>')
+    p.append(f'<path d="M{vx} {vy + 50}L{vx} {H}" stroke="#ffc83d" stroke-width="4" stroke-dasharray="40 50" opacity="0.5"/>')
+    # ceiling strip lights
+    for k in range(14):
+        t = 0.82 ** k
+        y = vy - 470 * t
+        p.append(f'<rect x="{vx - 160 * t - 8:.0f}" y="{y:.0f}" width="{320 * t + 16:.0f}" height="{6 * t + 2:.1f}" '
+                 'fill="#ffd9d9" opacity="0.5" filter="url(#glow)"/>')
+    # brake lights in pairs, receding
+    lights = []
+    for k in range(9):
+        t = 0.78 ** k
+        for lane in (-1, 1):
+            cx = vx + lane * 260 * t + rng.uniform(-10, 10) * t
+            cy = vy + 360 * t + 30
+            sep, r = 70 * t + 6, 7 * t + 2
+            lights.append((cx - sep, cy, r)); lights.append((cx + sep, cy, r))
+    p.append('<g fill="#ff2a3a" filter="url(#glow)">' + "".join(
+        f'<circle cx="{x:.0f}" cy="{y:.0f}" r="{r:.1f}"/>' for x, y, r in lights) + '</g>')
+    # streaks of the lights on the wet road
+    p.append('<g fill="#ff2a3a" opacity="0.2" filter="url(#streak)">' + "".join(
+        f'<rect x="{x - r:.0f}" y="{y + 10:.0f}" width="{2 * r:.0f}" height="{8 * r + 20:.0f}"/>'
+        for x, y, r in lights) + '</g>')
+    # neon signs on the walls
+    for x, y, w, h, c, v in [(150, 280, 50, 230, "#ff3344", True), (1720, 300, 50, 210, "#ff6b1a", True), (840, 230, 240, 40, "#ff3344", False)]:
+        p.append(glyphs(rng, x, y, w, h, c, v))
+    p.append('</svg>')
+    return "".join(p)
+
+
 def main(out):
     os.makedirs(out, exist_ok=True)
-    for name, fn in (("rain-alley", rain_alley), ("sodium-street", sodium_street)):
+    for name, fn in (("rain-alley", rain_alley), ("sodium-street", sodium_street),
+                     ("rail-line", rail_line), ("harbor", harbor), ("tunnel", tunnel)):
         path = os.path.join(out, f"{name}.svg")
         svg = fn()
         with open(path, "w") as f:

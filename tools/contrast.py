@@ -2,10 +2,10 @@
 """Check WCAG contrast for every Neon Alley palette.
 
 Reads the palette blocks in src/theme.src.css and checks each text
-colour against the note and sidebar backgrounds:
+color against the note and sidebar backgrounds:
 
 - body text: 7:1 or more
-- coloured text (headings, links, bold, italics, tags): 4.5:1
+- colored text (headings, links, bold, italics, tags): 4.5:1
 - faint text: 3:1
 
 Usage: python3 tools/contrast.py src/theme.src.css
@@ -20,8 +20,8 @@ BLOCK = re.compile(r"\n(\.theme-(dark|light)(\.na-[a-z-]+)?) \{\n(.*?)\n\}",
                    re.S)
 
 
-def luminance(hex_colour):
-    h = hex_colour.lstrip("#")
+def luminance(hex_color):
+    h = hex_color.lstrip("#")
     channels = [int(h[i:i + 2], 16) / 255 for i in (0, 2, 4)]
     channels = [c / 12.92 if c <= 0.03928 else ((c + 0.055) / 1.055) ** 2.4
                 for c in channels]
@@ -58,14 +58,14 @@ def main(path):
             for role in ROLES:
                 if role not in merged:
                     continue
-                colour = resolve(merged[role])
-                if not colour.startswith("#"):
+                color = resolve(merged[role])
+                if not color.startswith("#"):
                     continue
                 need = 7 if role == "text" else 3 if role == "faint" else 4.5
-                r = ratio(colour, bg)
+                r = ratio(color, bg)
                 if r < need:
                     problems.append(f"{role} on {background}: {r:.2f} "
-                                    f"(need {need}) {colour} on {bg}")
+                                    f"(need {need}) {color} on {bg}")
         print(selector, "OK" if not problems else "")
         for p in problems:
             print("   ", p)

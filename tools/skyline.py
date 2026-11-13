@@ -2,7 +2,7 @@
 """Draw the built-in "Neon skyline" wallpaper as an SVG.
 
 A city at night in the rain: three layers of towers with lit
-windows, neon signs in the Neon Alley colours (made-up glyphs, no
+windows, neon signs in the Neon Alley colors (made-up glyphs, no
 real text), sodium haze on the horizon and a wet street that
 reflects it all. The random seed is fixed, so the same image comes
 out every time.
@@ -19,13 +19,13 @@ WARM = ["#ffc83d", "#ffd98a", "#ffe9c2", "#ff9a5c"]
 COOL = ["#9fe9ff", "#3de0ff", "#c9d6ff"]
 rng = random.Random(2077)
 
-# Windows are collected per colour and opacity and drawn as one path
+# Windows are collected per color and opacity and drawn as one path
 # each, which keeps the file small.
 windows = {}
 
 
-def window(x, y, w, h, colour, op):
-    key = (colour, op)
+def window(x, y, w, h, color, op):
+    key = (color, op)
     windows.setdefault(key, []).append(
         f"M{x:.0f} {y:.0f}h{w:.0f}v{h:.0f}h{-w:.0f}z")
 
@@ -134,7 +134,7 @@ def mid_layer():
     out = []
     for x, w, h in towers(-30, W + 30, (180, 520), (56, 150)):
         if 560 < x < 1360 and h > 430:
-            h = rng.randint(250, 420)   # keep the centre lower
+            h = rng.randint(250, 420)   # keep the center lower
         y = HORIZON - h
         out.append(f'<rect x="{x}" y="{y}" width="{w}" height="{h}" '
                    'fill="#0d0b19"/>')
@@ -155,11 +155,11 @@ def mid_layer():
     return out
 
 
-def glyph_sign(sx, sy, sw, sh, colour, vertical):
+def glyph_sign(sx, sy, sw, sh, color, vertical):
     """A neon sign of made-up glyphs: each glyph is two or three
     strokes on a 3 x 3 grid, so it reads as signage, not as words."""
     g = [f'<rect x="{sx}" y="{sy}" width="{sw}" height="{sh}" rx="4" '
-         f'fill="#08070e" stroke="{colour}" stroke-width="2.5"/>']
+         f'fill="#08070e" stroke="{color}" stroke-width="2.5"/>']
     n = max(2, (sh if vertical else sw) // 30)
     size = (sw - 14) if vertical else min(sh - 12, (sw - 14) / n - 6)
     pts = [(i, j) for i in range(3) for j in range(3)]
@@ -174,11 +174,11 @@ def glyph_sign(sx, sy, sw, sh, colour, vertical):
             strokes.append(
                 f"M{gx + a * size / 2:.1f} {gy + b * size / 2:.1f}"
                 f"L{gx + c * size / 2:.1f} {gy + d * size / 2:.1f}")
-    g.append(f'<path d="{"".join(strokes)}" stroke="{colour}" '
+    g.append(f'<path d="{"".join(strokes)}" stroke="{color}" '
              'stroke-width="2.6" stroke-linecap="round" fill="none"/>')
     return (f'<g filter="url(#glow)">{"".join(g)}</g>'
             f'<rect x="{sx - 40}" y="{sy - 40}" width="{sw + 80}" '
-            f'height="{sh + 80}" fill="{colour}" opacity="0.13" '
+            f'height="{sh + 80}" fill="{color}" opacity="0.13" '
             'filter="url(#soft)"/>')
 
 
@@ -199,7 +199,7 @@ def near_layer():
                    f'fill="{rim}" opacity="0.4"/>')
         light_tower(x, y, w, h, 16, 21, 0.14, 0.6, [0.5, 0.7])
         for _ in range(rng.choice([1, 2, 2])):
-            colour = rng.choice(NEON)
+            color = rng.choice(NEON)
             vertical = rng.random() < 0.55
             if vertical:
                 sw, sh = rng.randint(30, 38), rng.randint(130, 240)
@@ -213,7 +213,7 @@ def near_layer():
                 if not any(box[0] < b[2] and b[0] < box[2] and
                            box[1] < b[3] and b[1] < box[3] for b in taken):
                     taken.append(box)
-                    signs.append(glyph_sign(sx, sy, sw, sh, colour,
+                    signs.append(glyph_sign(sx, sy, sw, sh, color,
                                             vertical))
                     break
     return out, signs

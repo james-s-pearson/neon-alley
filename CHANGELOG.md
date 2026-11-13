@@ -1,5 +1,31 @@
 # Changelog
 
+## 1.1.0 (November 13, 2026)
+
+- New Colors settings (Style Settings or Style Manager): the accent (or
+  Obsidian's own accent color), the six neon colors, bold, italic and
+  bold italic, each heading level, links, the default and severity
+  tags, code colors, each callout type, the Retro frames, and text and
+  background shades. Each has a dark and a light value; an empty color
+  keeps the palette's own.
+- New Look settings: use the body font for headings, normal-case
+  headings, and sharp or rounded corners.
+- Glow strength slider (0 to 2) for headings and links on hover. It
+  replaces "Turn off heading glow": if you had turned the glow off, set
+  Glow strength to 0.
+- Three more built-in wallpapers in other colors: Rail line (green),
+  Harbor (ice blue) and Tunnel (red).
+- Mermaid diagrams follow the theme: accent outlines with a soft glow,
+  cyan lines and neon chart colors.
+- Tasks plugin: overdue due dates in red, due today in amber.
+- File Explorer Note Count plugin: folder counts as small HUD-style tags.
+- Smaller theme file for the same look: the embedded font keeps only the
+  characters headings use (Thai and precomposed Vietnamese letters are
+  dropped), and the wallpapers are embedded as text instead of base64.
+- The editor's italic keywords no longer use a :has() selector, which
+  Obsidian's theme review flagged; they look the same.
+- American English spelling in the theme's comments and settings.
+
 ## 1.0.1 (November 12, 2026)
 
 - Mission-status task markers (`[/]`, `[!]`, `[?]`, `[>]`, `[-]`) work

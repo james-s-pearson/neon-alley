@@ -1,6 +1,7 @@
 #!/bin/sh
-# Builds theme.css from src/theme.src.css and embeds the fonts and
-# the built-in wallpapers (made by tools/skyline.py and tools/scenes.py).
+# Builds theme.css from src/theme.src.css and embeds the fonts (subset by
+# tools/subset-fonts.sh) and the built-in wallpapers (made by tools/skyline.py
+# and tools/scenes.py; embedded as text by tools/svg_data_uri.py).
 # Usage: ./build.sh            (writes theme.css next to this script)
 set -eu
 cd "$(dirname "$0")"
@@ -15,9 +16,10 @@ font_face() {
   cat src/theme.src.css
   font_face src/fonts/ChakraPetch-SemiBold.woff2 600
   font_face src/fonts/ChakraPetch-Bold.woff2 700
-  for pair in skyline:neon-skyline alley:rain-alley sodium:sodium-street; do
-    printf 'body {\n  --na-%s: url(data:image/svg+xml;base64,%s);\n}\n' \
-      "${pair%%:*}" "$(base64 < "src/wallpapers/${pair#*:}.svg" | tr -d '\n')"
+  for pair in skyline:neon-skyline alley:rain-alley sodium:sodium-street \
+              rail:rail-line harbor:harbor tunnel:tunnel; do
+    printf 'body {\n  --na-%s: %s;\n}\n' \
+      "${pair%%:*}" "$(python3 tools/svg_data_uri.py "src/wallpapers/${pair#*:}.svg")"
   done
 } > theme.css
 
