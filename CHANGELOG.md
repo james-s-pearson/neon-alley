@@ -1,32 +1,32 @@
 # Changelog
 
-## 1.0.1 (12 November 2026)
+## 1.0.1 (November 12, 2026)
 
 - Mission-status task markers (`[/]`, `[!]`, `[?]`, `[>]`, `[-]`) work
   again in Obsidian 1.15, which moved the task status from the checkbox
   to its line; both are now matched.
-- Cancelled tasks (`[-]`) are faded and struck through again.
+- Canceled tasks (`[-]`) are faded and struck through again.
 - New screenshots, taken in a demo vault: a full-window view with
   wallpaper, and Retro, light and Cold Forge views.
 
-## 1.0.0 (12 November 2026)
+## 1.0.0 (November 12, 2026)
 
 First public release.
 
 - Inline-code styling no longer spreads into code blocks (no raised
-  boxes behind code lines; uncoloured code keeps the code colour).
+  boxes behind code lines; uncolored code keeps the code color).
 - Custom wallpaper help text no longer shows a web address.
 - Release workflow: GitHub release made from a version tag, with a check
   that theme.css is built from the source.
 
 ## 0.3.0
 
-- Code colours and code-block background now match LazyVim's default
+- Code colors and code-block background now match LazyVim's default
   Tokyo Night (moon and day), checked against Neovim's own
   highlighting.
-- H2 now has a fine underline like H1, in its own colour.
+- H2 now has a fine underline like H1, in its own color.
 - The theme now paints the space behind the panes itself, so it stays
-  the palette's frame colour with Obsidian's translucent window on and
+  the palette's frame color with Obsidian's translucent window on and
   whatever macOS appearance is set.
 - Built-in wallpapers: "Neon skyline", "Rain alley" and "Sodium street"
   (SVG drawn by `tools/skyline.py` and `tools/scenes.py`), with dimming,
@@ -43,10 +43,10 @@ First public release.
 - Shape markers on severity tags (◆ ▲ ■ ▼ ●), with an option to turn
   them off.
 - HUD-style status bar, link glow on hover and optional CRT scanlines.
-- Graph view and Canvas colours for every palette.
+- Graph view and Canvas colors for every palette.
 - Calendar and Kanban plugin styling.
-- Severity and status colours now also apply to tags in Properties.
-- Every text colour meets WCAG contrast targets in all eight palette
+- Severity and status colors now also apply to tags in Properties.
+- Every text color meets WCAG contrast targets in all eight palette
   and mode combinations.
 - Fonts embedded as WOFF2; the theme is now about 108 KB, down from
   about 247 KB.

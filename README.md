@@ -4,7 +4,7 @@
 
 An Obsidian theme that looks like a city street at night: dark asphalt,
 traffic-cone orange and a row of neon signs. It has HUD-style callouts
-for security work, colour-coded severity tags and a retro, framed
+for security work, color-coded severity tags and a retro, framed
 layout with buttons that press in.
 
 ## How this was made
@@ -38,7 +38,7 @@ Choose these in the Style Settings or Style Manager plugin.
 **Callout styles:**
 
 - **HUD**: corner brackets and spaced capitals.
-- **Glass**: a soft glow with a coloured left edge.
+- **Glass**: a soft glow with a colored left edge.
 
 **Backdrop and wallpaper:** behind the panes sits one of three built-in
 wallpapers drawn for this theme: Neon skyline (a rainy city at night),
@@ -79,8 +79,8 @@ Use these like any Obsidian callout, for example `> [!vuln]`:
 
 ![Severity and status tags](images/05-severity-and-status-tags.png)
 
-Severity tags get a colour and a shape, so the level reads without
-relying on colour alone:
+Severity tags get a color and a shape, so the level reads without
+relying on color alone:
 
 - `#critical`: red, ◆
 - `#high`: orange, ▲
@@ -88,7 +88,7 @@ relying on colour alone:
 - `#low`: green, ▼
 - `#info`: blue, ●
 
-Project status tags get their own colours: `#todo`, `#in-progress`,
+Project status tags get their own colors: `#todo`, `#in-progress`,
 `#blocked`, `#risk`, `#decision` and `#done`.
 
 ### Mission-status tasks
@@ -99,27 +99,27 @@ Project status tags get their own colours: `#todo`, `#in-progress`,
 - `- [!]` urgent
 - `- [?]` question
 - `- [>]` deferred
-- `- [-]` cancelled
+- `- [-]` canceled
 
 ### Other details
 
 - Headings in Chakra Petch, with small capitals and a soft glow on the
   note title and the first two heading levels, and a fine underline
   under H1 and H2
-- Code in Tokyo Night colours, the default colour scheme of LazyVim
+- Code in Tokyo Night colors, the default color scheme of LazyVim
   (moon in dark mode, day in light mode). Obsidian's own highlighters
-  know fewer kinds of token than Neovim, so a few kinds share a colour
+  know fewer kinds of token than Neovim, so a few kinds share a color
   (for example, every keyword is pink)
 - A HUD-style status bar
-- Graph view and Canvas colours that follow the palette
+- Graph view and Canvas colors that follow the palette
 - Styling for the Calendar and Kanban plugins
 - Optional prompt-style headings (`❯`), CRT scanlines, flat panes,
   plain frames, flat buttons and a glass sheen for Retro
 
 ## Accessibility
 
-Every text colour meets WCAG contrast targets in all eight palette and
-mode combinations: 7:1 for body text, 4.5:1 for coloured text and 3:1
+Every text color meets WCAG contrast targets in all eight palette and
+mode combinations: 7:1 for body text, 4.5:1 for colored text and 3:1
 for faint text. Run the check yourself with:
 
 ```sh
@@ -143,15 +143,15 @@ by hand:
 
 ## Working with other plugins
 
-- **Colored Tags**: this plugin colours every tag. Neon Alley overrides
+- **Colored Tags**: this plugin colors every tag. Neon Alley overrides
   it for the severity and status tags only, so the rest of your tags
-  keep their plugin colours.
+  keep their plugin colors.
 - **Code Block Customizer**: set its theme to **Obsidian** so code
-  blocks and inline code follow Neon Alley's colours. Its other themes
-  use fixed colours of their own.
-- **Shiki Highlighter**: this plugin colours code with its own theme,
+  blocks and inline code follow Neon Alley's colors. Its other themes
+  use fixed colors of their own.
+- **Shiki Highlighter**: this plugin colors code with its own theme,
   in both editing and Reading view, and overrides Neon Alley's code
-  colours. Choose its **Obsidian Theme** to use Neon Alley's colours,
+  colors. Choose its **Obsidian Theme** to use Neon Alley's colors,
   or a Tokyo Night theme of your own.
 
 ## Build from source
@@ -169,13 +169,13 @@ fonts and writes `theme.css`:
   SIL Open Font License 1.1 (see `OFL.txt`).
 - The Retro structure was inspired by the Retroma theme by emarpiee.
   Neon Alley shares no code with it.
-- Code colours follow Tokyo Night as set up in tokyonight.nvim by Folke
-  Lemaitre (Apache License 2.0), the default colour scheme of LazyVim.
+- Code colors follow Tokyo Night as set up in tokyonight.nvim by Folke
+  Lemaitre (Apache License 2.0), the default color scheme of LazyVim.
 - The wallpapers were drawn for this theme by `tools/skyline.py` and
   `tools/scenes.py`.
 
-## Licence
+## License
 
-Neon Alley is released under the MIT Licence (see `LICENSE`). The
+Neon Alley is released under the MIT License (see `LICENSE`). The
 embedded Chakra Petch font keeps its own SIL Open Font License 1.1
 (see `OFL.txt`).

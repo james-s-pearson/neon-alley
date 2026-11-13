@@ -33,8 +33,8 @@ without private content in the screenshot.
   embedded. Keep it that way.
 - Keep each pull request to one change, and explain why it is needed.
 
-## Licence
+## License
 
 By contributing, you agree that your contribution is licensed under the
-MIT licence in [LICENSE](LICENSE). The Chakra Petch font keeps its own
-licence ([OFL.txt](OFL.txt)).
+MIT license in [LICENSE](LICENSE). The Chakra Petch font keeps its own
+license ([OFL.txt](OFL.txt)).
